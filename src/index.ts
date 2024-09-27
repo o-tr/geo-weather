@@ -1,10 +1,10 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import {RouteHealthz} from "./routes/healthz";
+import {RouteHealthz} from "./routes/api/healthz";
 
 const app = new Hono()
 
-app.get('/healthz', RouteHealthz);
+app.get('/api/healthz', RouteHealthz);
 
 const port = 3000
 console.log(`Server is running on port ${port}`)
