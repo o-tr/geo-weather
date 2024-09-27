@@ -267,6 +267,23 @@ export const geoPosData = {
   }
 }
 
+export const flatGeoPosIds: Record<string, string> = (()=>{
+  const result = {} as Record<string, string>;
+  const get = (data: Record<string, any>, prefix: string) => {
+    for (const [key, value] of Object.entries(data)) {
+      if (typeof value === "string") {
+        result[prefix + key] = value;
+      } else {
+        get(value, prefix + key + " ");
+      }
+    }
+  }
+  get(geoPosData, "");
+  return result;
+})();
+
+export const geoPosIds = Object.values(flatGeoPosIds);
+
 export const geoPosName = (()=>{
   const result = {} as Record<string, string>;
   const get = (data: Record<string, any>, prefix: string) => {
