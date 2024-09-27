@@ -5,7 +5,7 @@ window.onSuccess = (val)=>{
 
 const main = async() => {
   const [positions,weather] = await Promise.all([await fetch('/api/v1/geo-list'), await fetch('/api')]);
-  const data = await positions.json();
+  const data = (await positions.json()).data;
   const weatherData = await weather.json();
   const geoPosId = weatherData.geoPosId;
   const list = document.getElementById('list');
