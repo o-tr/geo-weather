@@ -1,5 +1,5 @@
 import {Context} from "hono";
-import {geoPosData} from "../../const/geo-pos-list";
+import {geoPosData} from "../../../const/geo-pos-list";
 
 export const RouteApiGeoList = (c:Context) =>{
   return c.json({
