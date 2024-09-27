@@ -82,7 +82,7 @@ const main = async() => {
       alert('CAPTCHAの認証を行ってください');
       return;
     }
-    const res = await fetch('/update', {
+    const res = await fetch('/api/v1/save-geo-id', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
