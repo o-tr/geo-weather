@@ -11,10 +11,11 @@ type ResponseItem = {
 }
 
 const cache = {} as Record<string, ResponseItem>;
+const ttl = 1000 * 60 * 10;
 
 export const getOverview = (geoId: string) => {
   const weatherId = getWeatherId(geoId);
-  if (Object.keys(cache).includes(geoId)) {
+  if (Object.keys(cache).includes(geoId) && cache[geoId].fetchedAt + ttl > Date.now()) {
     return {
       ...cache[geoId],
       isCached: true
