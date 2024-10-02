@@ -8,6 +8,7 @@ import {defaultGeoPos} from "./default-geo-pos";
 export const getGeoPosId = async (ip: string, c: Context) => {
   const queryId = c.req.queries("geoPosId")?.[0];
   if (queryId && geoPosIds.includes(queryId)) {
+    console.log(JSON.stringify({date: Date.now(),ip, prefId: "none", geoPosId: queryId, source: "query"}));
     return {
       source: "query",
       geoId: queryId,
@@ -16,7 +17,7 @@ export const getGeoPosId = async (ip: string, c: Context) => {
 
   try{
     const geoPosId = await geoGeoPosIdUser(ip);
-    console.log(`ip: ${ip}, prefId: none, geoPosId: ${geoPosId}, source: user`);
+    console.log(JSON.stringify({date: Date.now(),ip, prefId: "none", geoPosId, source: "user"}));
     return {
       source: "user",
       geoId: geoPosId
@@ -27,7 +28,7 @@ export const getGeoPosId = async (ip: string, c: Context) => {
   try {
     const geoPosId = await getGeoPosIdIPInfo(ip);
     if (!prefId || geoPosId.startsWith(prefId)){
-      console.log(`ip: ${ip}, prefId: ${prefId}, geoPosId: ${geoPosId}, source: ipinfo`)
+      console.log(JSON.stringify({date: Date.now(),ip, prefId:prefId??"none", geoPosId, source: "ipinfo"}));
       return {
         source: "ipinfo",
         geoId: geoPosId
@@ -36,14 +37,14 @@ export const getGeoPosId = async (ip: string, c: Context) => {
   }catch{}
 
   if (prefId) {
-    console.log(`ip: ${ip}, prefId: ${prefId}, geoPosId: ${defaultGeoPos[prefId]}, source: hostname`)
+    console.log(JSON.stringify({date: Date.now(),ip, prefId, geoPosId: defaultGeoPos[prefId], source: "hostname"}));
     return {
       source: "hostname",
       geoId: defaultGeoPos[prefId]
     };
   }
 
-  console.log(`ip: ${ip}, prefId: ${prefId}, geoPosId: none, source: fallback`)
+  console.log(JSON.stringify({date: Date.now(),ip, prefId: "none", geoPosId: "130010", source: "fallback"}));
   return {
     source: "fallback",
     geoId: "130010"
