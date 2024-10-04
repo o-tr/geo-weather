@@ -16,7 +16,7 @@ const ttl = 1000 * 60 * 10;
 export const getOverview = (geoId: string) => {
   if (geoId.startsWith("loc:")) {
     return {
-      data: new Promise(async(resolve)=>{
+      data: new Promise<{data: string, source: string}>(async(resolve)=>{
         resolve({
           data: "Overview is not available for this location.",
           source: "fallback"

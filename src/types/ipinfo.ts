@@ -7,7 +7,7 @@ export const IPInfoResponse = z.object({
   country: z.string(),
   loc: z.string(),
   org: z.string(),
-  postal: z.string(),
+  postal: z.optional(z.string()),
   timezone: z.string(),
 })
 
