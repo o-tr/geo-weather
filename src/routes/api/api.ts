@@ -4,6 +4,8 @@ import {getGeoPosId} from "@/utils/getGeoPosId";
 import {getWeather} from "@/utils/getWeather";
 import {getOverview} from "@/utils/getOverview";
 
+const fallbackMessage = `Currently this service is not available in your region. Showing weather forecast in Tokyo instead.`;
+
 export const registerApiIndex = (app: Hono) => {
   app.get('/api',async(c)=>{
     const ip = getRequestIp(c);
@@ -20,7 +22,7 @@ export const registerApiIndex = (app: Hono) => {
         publishingOffice: forecast.data.publishingOffice,
         reportDatetime: forecast.data.reportDatetime,
         region: forecast.data.regionName,
-        overview: overview.data,
+        overview: source === "fallback" ? `${fallbackMessage}\n${overview.data}` : overview.data,
         geoPosId,
         metadata: {
           forecast: {
