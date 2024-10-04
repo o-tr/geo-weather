@@ -1,26 +1,11 @@
-import {WeatherResponse} from "@/types/weather";
+import {ForecastItem, FormattedWeather, WeatherResponse} from "@/types/weather";
 import {geoPosName} from "@/const/geo-pos-list";
 import {getArea} from "./getArea";
 import {getFormattedDate} from "./getFormattedDate";
 import {getWeatherIconId, getWeatherLabel} from "./getWeatherLabels";
 
-export type FormattedWeather = {
-  weather: ForecastItem[];
-  publishingOffice: string;
-  reportDatetime: string;
-  regionName: string;
-}
 
-type ForecastItem = {
-  date: string;
-  icon: string;
-  weather: string;
-  pop: string;
-  tempMin: string;
-  tempMax: string;
-}
-
-export const formatWeather = (forecast: WeatherResponse, geoPosId: string)=> {
+export const formatWeather = (forecast: WeatherResponse, geoPosId: string): FormattedWeather=> {
   const [threeDays, oneWeek] = forecast;
 
   const [threeDaysForecast, threeDaysPop, threeDaysTemp] = threeDays.timeSeries;

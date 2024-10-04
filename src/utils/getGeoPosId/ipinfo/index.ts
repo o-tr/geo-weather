@@ -15,7 +15,7 @@ export const getGeoPosIdIPInfo = async(ip: string):Promise<string> => {
   const response = await fetch(`https://ipinfo.io/${ip}/json?token=${apiToken}`);
   const json = await response.json();
   const data = IPInfoResponse.parse(json);
-  const geoId = resolveGeoId(data.region, data.city);
+  const geoId = resolveGeoId(data);
   await prisma.geoWeather.create({
     data:{
       ip,

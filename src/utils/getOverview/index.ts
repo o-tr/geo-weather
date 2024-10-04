@@ -14,6 +14,18 @@ const cache = {} as Record<string, ResponseItem>;
 const ttl = 1000 * 60 * 10;
 
 export const getOverview = (geoId: string) => {
+  if (geoId.startsWith("loc:")) {
+    return {
+      data: new Promise(async(resolve)=>{
+        resolve({
+          data: "Overview is not available for this location.",
+          source: "fallback"
+        });
+      }),
+      fetchedAt: Date.now(),
+      isCached: false
+    };
+  }
   const weatherId = getWeatherId(geoId);
   if (Object.keys(cache).includes(geoId) && cache[geoId].fetchedAt + ttl > Date.now()) {
     return {

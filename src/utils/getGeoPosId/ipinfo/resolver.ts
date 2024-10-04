@@ -1,14 +1,18 @@
 import {GeoLocations} from "./location";
+import {ZIPInfoResponse} from "@/types/ipinfo";
 
-export const resolveGeoId = (prefecture: string, city: string) => {
-  const pref = GeoLocations[prefecture];
+export const resolveGeoId = (data: ZIPInfoResponse) => {
+  const {region, city} = data;
+  const pref = GeoLocations[region];
   if (typeof pref === 'string') {
     return pref;
   }
-  const cityId = pref[city];
-  if (cityId) {
-    return cityId;
+  if (pref){
+    const cityId = pref[city];
+    if (cityId) {
+      return cityId;
+    }
   }
-  throw new Error(`Unknown city: ${prefecture} ${city}`);
+  return `loc:${data.loc}:${data.timezone}:${data.region}:${data.city}`;
 }
 

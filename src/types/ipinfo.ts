@@ -10,3 +10,5 @@ export const IPInfoResponse = z.object({
   postal: z.string(),
   timezone: z.string(),
 })
+
+export type ZIPInfoResponse = z.infer<typeof IPInfoResponse>;

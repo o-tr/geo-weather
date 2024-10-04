@@ -34,7 +34,9 @@ export const getGeoPosId = async (ip: string, c: Context) => {
         geoId: geoPosId
       };
     }
-  }catch{}
+  }catch (e){
+    console.log(e);
+  }
 
   if (prefId) {
     console.log(JSON.stringify({date: Date.now(),ip, prefId, geoPosId: defaultGeoPos[prefId], source: "hostname"}));

@@ -117,3 +117,19 @@ export const ZWeatherOverviewResponse = z.object({
 })
 
 export type WeatherOverviewResponse = z.infer<typeof ZWeatherOverviewResponse>;
+
+export type ForecastItem = {
+  date: string;
+  icon: string;
+  weather: string;
+  pop: string;
+  tempMin: string;
+  tempMax: string;
+}
+
+export type FormattedWeather = {
+  weather: ForecastItem[];
+  publishingOffice: string;
+  reportDatetime: string;
+  regionName: string;
+}
