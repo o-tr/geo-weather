@@ -1,6 +1,8 @@
 import { fetchWeatherApi } from 'openmeteo';
 import {ForecastItem, FormattedWeather} from "@/types/weather";
 import {getFormattedDate} from "@/utils/getWeather/format/getFormattedDate";
+import {getJMAfromWMO} from "@/utils/getJMAfromWMO";
+import {getWeatherLabel} from "@/utils/getWeather/format/getWeatherLabels";
 
 const ApiEndpoint = process.env.OPEN_METEO_API_ENDPOINT??"https://api.open-meteo.com/v1/forecast";
 
@@ -47,12 +49,13 @@ export const getOpenMeteoWeather = async (geoId: string): Promise<{data: Formatt
 
   for (let i = 0; i < weatherData.daily.time.length; i++) {
     const pop = weatherData.daily.precipitationProbabilityMax[i];
+    const weatherCode = getJMAfromWMO(weatherData.daily.weatherCode[i]);
     weather.push({
       date: getFormattedDate(weatherData.daily.time[i]).str,
-      icon: `${weatherData.daily.weatherCode[i]}`,
-      weather: `${weatherData.daily.weatherCode[i]}`,
-      tempMin: `${weatherData.daily.temperature2mMin[i]}`,
-      tempMax: `${weatherData.daily.temperature2mMax[i]}`,
+      icon: `${weatherCode}`,
+      weather: `${getWeatherLabel(`${weatherCode}`, "EN")}`,
+      tempMin: `${Math.round(weatherData.daily.temperature2mMin[i])}`,
+      tempMax: `${Math.round(weatherData.daily.temperature2mMax[i])}`,
       pop: pop===undefined||Number.isNaN(pop) ? "-" : `${pop}%`,
     });
   }

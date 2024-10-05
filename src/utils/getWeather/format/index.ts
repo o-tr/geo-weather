@@ -19,7 +19,7 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
     for (let i = 0; i < threeDaysForecast.timeDefines.length; i++) {
       const dateStr = getFormattedDate(threeDaysForecast.timeDefines[i]).str;
       const icon = getWeatherIconId(area.weatherCodes[i]);
-      const weather = getWeatherLabel(area.weatherCodes[i]);
+      const weather = getWeatherLabel(area.weatherCodes[i], "JA");
       threeDaysForecastData[dateStr] = {
         icon,
         weather
@@ -70,7 +70,7 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
     for (let i = 0; i < oneWeekForecast.timeDefines.length; i++) {
       const dateStr = getFormattedDate(oneWeekForecast.timeDefines[i]).str;
       const icon = getWeatherIconId(area.weatherCodes[i]);
-      const weather = getWeatherLabel(area.weatherCodes[i]);
+      const weather = getWeatherLabel(area.weatherCodes[i], "JA");
       const pop = area.pops[i];
       oneWeekForecastData[dateStr] = {
         icon,
