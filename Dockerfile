@@ -15,6 +15,7 @@ COPY ./ ./
 FROM --platform=linux/amd64 node:$NODE_VERSION AS runner
 
 WORKDIR /app
+RUN npm install -g npm
 RUN apt-get update -y && apt-get install -y openssl
 
 COPY --from=builder /app ./
