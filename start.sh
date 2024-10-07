@@ -1,1 +1,1 @@
-npx prisma generate&&npm run dev
+(npx prisma generate > /dev/null)&&npm run dev
