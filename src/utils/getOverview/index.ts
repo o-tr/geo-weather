@@ -1,5 +1,6 @@
 import {ZWeatherOverviewResponse} from "@/types/weather";
 import {getWeatherId} from "@/utils/getWeatherId";
+import {sleep} from "@/utils/sleep";
 
 type ResponseItem = {
   data: Promise<{
@@ -44,13 +45,25 @@ export const getOverview = (geoId: string) => {
   };
 }
 
-const getOverviewInternal = async(weatherId: string) => {
-  const source = `https://www.jma.go.jp/bosai/forecast/data/overview_forecast/${weatherId}.json`;
-  const response = await fetch(source);
-  const json = await response.json();
-  const data = ZWeatherOverviewResponse.parse(json);
-  return {
-    data: data.text.replace(/(\r\n|\r|\n)+?/g,"\n").split("\n").map((line)=>line.trim()).filter(Boolean).join("\n"),
-    source,
-  };
+const getOverviewInternal = async(weatherId: string, retryCount = 0): Promise<{data: string, source: string}> => {
+  try{
+    const source = `https://www.jma.go.jp/bosai/forecast/data/overview_forecast/${weatherId}.json`;
+    const response = await fetch(source);
+    const json = await response.json();
+    const data = ZWeatherOverviewResponse.parse(json);
+    return {
+      data: data.text.replace(/(\r\n|\r|\n)+?/g,"\n").split("\n").map((line)=>line.trim()).filter(Boolean).join("\n"),
+      source,
+    };
+  }catch (e) {
+    console.error(e);
+    if (retryCount < 3) {
+      await sleep(100);
+      return getOverviewInternal(weatherId, retryCount + 1);
+    }
+    return {
+      data: "Failed to fetch overview data.",
+      source: "fallback"
+    };
+  }
 }

@@ -2,6 +2,7 @@ import {getWeatherId} from "@/utils/getWeatherId";
 import {FormattedWeather, ZWeatherResponse} from "@/types/weather";
 import {formatWeather} from "@/utils/getWeather/format";
 import {getOpenMeteoWeather} from "@/utils/getWeather/open-meteo";
+import {sleep} from "@/utils/sleep";
 
 type ResponseItem = {
   data: Promise<{
@@ -42,13 +43,30 @@ export const getWeather = (geoId: string): ResponseItem => {
   };
 }
 
-const getWeatherInternal = async(geoId: string, weatherId: string) => {
-  const source = `https://www.jma.go.jp/bosai/forecast/data/forecast/${weatherId}.json`;
-  const response = await fetch(source);
-  const json = await response.json();
-  const data = ZWeatherResponse.parse(json);
-  return {
-    data: formatWeather(data, geoId),
-    source
-  };
+const getWeatherInternal = async(geoId: string, weatherId: string, retryCount = 0): Promise<{data: FormattedWeather, source: string}> => {
+  try{
+    const source = `https://www.jma.go.jp/bosai/forecast/data/forecast/${weatherId}.json`;
+    const response = await fetch(source);
+    const json = await response.json();
+    const data = ZWeatherResponse.parse(json);
+    return {
+      data: formatWeather(data, geoId),
+      source
+    };
+  }catch (e) {
+    console.error(e);
+    if (retryCount < 3) {
+      await sleep(100);
+      return getWeatherInternal(geoId, weatherId, retryCount + 1);
+    }
+    return {
+      data: {
+        weather: [],
+        publishingOffice: "fallback",
+        reportDatetime: "",
+        regionName: "",
+      },
+      source: "fallback"
+    }
+  }
 }
