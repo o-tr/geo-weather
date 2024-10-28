@@ -1,7 +1,9 @@
 export const GeoLocations: Record<string, string|Record<string, string>> = {
+  "Japan": "130010",
   "Tokyo": "340010",
   "Hiroshima": "340010",
   "Shimane": {
+    "default": "320010",
     "Matsue": "320010",
     "Izumo": "320010",
     "Kawamoto": "320020",
@@ -26,6 +28,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Minari": "320020"
   },
   "Tottori": {
+    "default": "310010",
     "Tottori-shi": "310010",
     "Tottori": "310010",
     "Sakaiminato": "310020",
@@ -43,6 +46,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Tenman": "310010"
   },
   "Yamaguchi": {
+    "default": "350010",
     "Ogōri-shimogō": "350020",
     "Iwakuni": "350030",
     "Kudamatsu": "350030",
@@ -82,6 +86,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
   "Gifu": "210010",
   "Kyoto": "260010",
   "Hokkaido": {
+    "default": "016010",
     "Sapporo": "016010",
     "Asahimachi": "016010",
     "Kushiro": "014030",
@@ -227,6 +232,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Taisho": "015010"
   },
   "Ishikawa": {
+    "default": "170010",
     "Kanazawa": "170010",
     "Suzu": "170020",
     "Nonoichi": "170010",
@@ -255,6 +261,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Ōnaganomachi": "170010"
   },
   "Kanagawa": {
+    "default": "140010",
     "Kawasaki": "140010",
     "Yokohama": "140010",
     "Karasawa": "140010",
@@ -456,6 +463,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Yōkōdai": "140010"
   },
   "Nagano": {
+    "default": "200010",
     "Saku": "200010",
     "Komoro": "200020",
     "Tōmi": "200010",
@@ -516,6 +524,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Tokiwa": "200010"
   },
   "Aomori": {
+    "default": "020010",
     "Misawa": "020040",
     "Komatsugaoka": "020040",
     "Hachinohe": "020030",
@@ -554,6 +563,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Nambu": "020050"
   },
   "Shizuoka": {
+    "default": "220010",
     "Numazu": "220030",
     "Kikugawa": "220040",
     "Gotemba": "220050",
@@ -622,6 +632,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Surugadai": "220020"
   },
   "Niigata": {
+    "default": "150010",
     "Sanjō": "150020",
     "Kamo": "150030",
     "Murakami": "150020",
@@ -689,6 +700,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Yashiroda": "150010"
   },
   "Chiba": {
+    "default": "120010",
     "Tomisato": "120010",
     "Kemigawa": "120010",
     "Chiba": "120010",
@@ -809,6 +821,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
   },
   "Tochigi": "090010",
   "Saitama": {
+    "default": "110010",
     "Wako": "110010",
     "Kukichūō": "110010",
     "Saitama": "110010",
@@ -1002,6 +1015,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
   "Saga": "410010",
   "Hyogo": "280010",
   "Hyōgo": {
+    "default": "280010",
     "Takarazuka": "280010",
     "Sumoto": "280010",
     "Tatsunochō-tominaga": "280010",
@@ -1059,6 +1073,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
   "Okayama": "330010",
   "Kagoshima": "460010",
   "Fukui": {
+    "default": "180010",
     "Fukui-shi": "180010",
     "Sabae": "180010",
     "Maruoka": "180010",
@@ -1080,6 +1095,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Obama (Nodai)": "180010"
   },
   "Mie": {
+    "default": "240010",
     "Yokkaichi": "240010",
     "Komono": "240010",
     "Ise": "240020",
@@ -1118,6 +1134,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Yurigaoka": "240010"
   },
   "Shiga": {
+    "default": "250010",
     "Youkaichi": "250010",
     "Hikone": "250020",
     "Ōtsu": "250010",
@@ -1145,6 +1162,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Shiga": "250010"
   },
   "Toyama": {
+    "default": "160010",
     "Yatsuomachi-higashikumisaka": "160010",
     "Takaoka": "160010",
     "Toyama": "160010",
@@ -1175,6 +1193,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Yanaida": "160020"
   },
   "Fukuoka": {
+    "default": "400010",
     "Kurume": "400040",
     "Ashiya": "400020",
     "Fukuoka": "400010",
@@ -1292,6 +1311,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
   "Kochi": "390010",
   "Nara": "290010",
   "Ehime": {
+    "default": "380010",
     "Shikokuchūō": "380010",
     "Matsuyama": "380010",
     "Minamiedo": "380010",
@@ -1319,6 +1339,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Seiyo": "380030"
   },
   "Okinawa": {
+    "default": "471010",
     "Naha": "471010",
     "Taira": "471010",
     "Okinawa": "471010",
@@ -1372,6 +1393,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
   "Kumamoto": "430010",
   "Oita": "440010",
   "Miyazaki": {
+    "default": "450010",
     "Miyakonojō": "450020",
     "Miyazaki": "450010",
     "Kobayashi": "450020",
@@ -1396,6 +1418,7 @@ export const GeoLocations: Record<string, string|Record<string, string>> = {
     "Mochida": "450010"
   },
   "Tokushima": {
+    "default": "360010",
     "Ikedachō": "360010",
     "Ishii": "360020",
     "Anan": "360020",

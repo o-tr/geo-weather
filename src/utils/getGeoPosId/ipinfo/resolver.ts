@@ -12,6 +12,7 @@ export const resolveGeoId = (data: ZIPInfoResponse) => {
     if (cityId) {
       return cityId;
     }
+    return pref["default"];
   }
   return `loc:${data.loc}:${data.timezone}:${data.region}:${data.city}`;
 }
