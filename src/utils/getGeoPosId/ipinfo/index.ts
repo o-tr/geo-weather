@@ -3,6 +3,7 @@ import {resolveGeoId} from "./resolver";
 import {IPInfoResponse} from "@/types/ipinfo";
 
 const apiToken = process.env.IPINFO_API_TOKEN;
+const endpoint = process.env.IPINFO_API_ENDPOINT;
 
 export const getGeoPosIdIPInfo = async(ip: string):Promise<string> => {
   const geoObj = await prisma.geoWeather.findFirst({
@@ -12,7 +13,7 @@ export const getGeoPosIdIPInfo = async(ip: string):Promise<string> => {
     }
   });
   if (geoObj) return geoObj.geoId;
-  const response = await fetch(`https://ipinfo.io/${ip}/json?token=${apiToken}`);
+  const response = await fetch(`${endpoint}/${ip}/json?token=${apiToken}`);
   const json = await response.json();
   const data = IPInfoResponse.parse(json);
   const geoId = resolveGeoId(data);
