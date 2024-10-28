@@ -1,6 +1,6 @@
 import {Context} from "hono";
 import {geoPosIds} from "@/const/geo-pos-list";
-import {geoGeoPosIdUser} from "./user";
+import {geoGeoPosIdCached} from "./user";
 import {getGeoPrefIdHostname} from "./hostname";
 import {getGeoPosIdIPInfo} from "./ipinfo";
 import {defaultGeoPos} from "./default-geo-pos";
@@ -16,11 +16,11 @@ export const getGeoPosId = async (ip: string, c: Context) => {
   }
 
   try{
-    const geoPosId = await geoGeoPosIdUser(ip);
-    console.log(JSON.stringify({date: Date.now(),ip, prefId: "none", geoPosId, source: "user"}));
+    const {geoId,source} = await geoGeoPosIdCached(ip);
+    console.log(JSON.stringify({date: Date.now(),ip, prefId: "none", geoId, source: source}));
     return {
-      source: "user",
-      geoId: geoPosId
+      source: source,
+      geoId: geoId
     };
   }catch{}
 
