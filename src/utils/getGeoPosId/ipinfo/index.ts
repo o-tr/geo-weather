@@ -4,12 +4,13 @@ import {IPInfoResponse} from "@/types/ipinfo";
 
 const apiToken = process.env.IPINFO_API_TOKEN;
 const endpoint = process.env.IPINFO_API_ENDPOINT;
+const sourceName = process.env.IPINFO_API_SOURCE_NAME ?? "ipinfo";
 
 export const getGeoPosIdIPInfo = async(ip: string):Promise<string> => {
   const geoObj = await prisma.geoWeather.findFirst({
     where:{
       ip,
-      source: "ipinfo"
+      source: sourceName
     }
   });
   if (geoObj) return geoObj.geoId;
@@ -21,7 +22,7 @@ export const getGeoPosIdIPInfo = async(ip: string):Promise<string> => {
     data:{
       ip,
       geoId,
-      source: "ipinfo"
+      source: sourceName
     }
   });
   return geoId;
