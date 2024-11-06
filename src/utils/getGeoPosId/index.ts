@@ -27,7 +27,7 @@ export const getGeoPosId = async (ip: string, c: Context) => {
   const prefId = await getGeoPrefIdHostname(ip);
   try {
     const geoPosId = await getGeoPosIdIPInfo(ip);
-    if (!prefId || geoPosId.startsWith(prefId)){
+    if (!prefId || prefId.some(v=>geoPosId?.startsWith(v))){
       console.log(JSON.stringify({date: Date.now(),ip, prefId:prefId??"none", geoPosId, source: "ipinfo"}));
       return {
         source: "ipinfo",
@@ -38,11 +38,17 @@ export const getGeoPosId = async (ip: string, c: Context) => {
     console.log(e);
   }
 
-  if (prefId) {
-    console.log(JSON.stringify({date: Date.now(),ip, prefId, geoPosId: defaultGeoPos[prefId], source: "hostname"}));
+  if (prefId && prefId[0]) {
+    console.log(JSON.stringify({date: Date.now(),ip, prefId, geoPosId: defaultGeoPos[prefId[0]], source: "hostname"}));
+    if (prefId[0].length === 6) {
+      return {
+        source: "hostname",
+        geoId: prefId[0]
+      };
+    }
     return {
       source: "hostname",
-      geoId: defaultGeoPos[prefId]
+      geoId: defaultGeoPos[prefId[0]]
     };
   }
 

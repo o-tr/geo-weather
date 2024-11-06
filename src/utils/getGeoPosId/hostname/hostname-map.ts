@@ -161,15 +161,12 @@ export const MeshHostnamePrefMap = {
 } as { [key: string]: string}
 
 export const EoNetHostnamePrefMap = {
-  "osk1": "27",
-  "osk2": "27",
-  "osk3": "27",
-  "hyg1": "28",
-  "hyg2": "28",
-  "kyt1": "26",
-  "shg1": "25",
-  "nar1": "29",
-  "wkm1": "30",
+  "osk": "27",
+  "hyg": "28",
+  "kyt": "26",
+  "shg": "25",
+  "nar": "29",
+  "wky": "30",
 } as { [key: string]: string}
 
 export const HiHoHostnamePrefMap = {
@@ -366,4 +363,20 @@ export const NuroHostnamePrefMap = {
   "hrsn": "34",
   "fkol": "40",
   "sagl": "41",
+} as { [key: string]: string}
+
+export const VectantHostnamePrefMap = {
+  "miyagi": "04",
+  "saitama": "11",
+  "chiba": "12",
+  "tokyo": "13",
+  "kanagawa": "14",
+  "nagano": "20",
+  "shizuoka": "22",
+  "aichi": "23",
+  "kyoto": "26",
+  "osaka": "27",
+  "hyogo": "28",
+  "hiroshima": "34",
+  "fukuoka": "40",
 } as { [key: string]: string}
