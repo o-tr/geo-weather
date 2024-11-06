@@ -8,7 +8,8 @@ export const geoGeoPosIdCached = async(ip: string):Promise<{
 }> => {
   const geoObj = await prisma.geoWeather.findFirst({
     where:{
-      ip
+      ip,
+      source: "user",
     }
   });
   if(!geoObj) throw new Error("No geo data");

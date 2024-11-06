@@ -1,15 +1,15 @@
 import {prisma} from "@/lib/prisma";
 import {resolveGeoId} from "./resolver";
 import {IPInfoResponse} from "@/types/ipinfo";
-
-const apiToken = process.env.IPINFO_API_TOKEN;
-const endpoint = process.env.IPINFO_API_ENDPOINT;
-const sourceName = process.env.IPINFO_API_SOURCE_NAME ?? "ipinfo";
+import { apiToken, endpoint, sourceName } from "@/const/env";
 
 export const getGeoPosIdIPInfo = async(ip: string):Promise<string> => {
   const geoObj = await prisma.geoWeather.findFirst({
     where:{
-      ip
+      ip,
+      source:{
+        not: "user"
+      }
     }
   });
   if (geoObj) return geoObj.geoId;
