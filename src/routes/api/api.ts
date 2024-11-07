@@ -22,6 +22,7 @@ export const registerApiIndex = (app: Hono) => {
         region: forecast.data.regionName,
         overview: overview.data,
         geoPosId,
+        locale: geoPosId.startsWith("loc:") ? "en" : "ja",
         metadata: {
           forecast: {
             isCached: weather.isCached,
