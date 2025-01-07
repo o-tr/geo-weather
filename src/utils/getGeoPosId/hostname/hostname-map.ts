@@ -379,6 +379,7 @@ export const parseNuroHostname = hostnamePrefMapGenerator({
 });
 
 export const parseVectantHostname = hostnamePrefMapGenerator({
+  aomori: "02",
   miyagi: "04",
   saitama: "11",
   chiba: "12",
@@ -407,4 +408,21 @@ export const parseGmoIspHostname = hostnamePrefMapGenerator({
   saitama: "11",
   shizuoka: "22",
   tokyo: "13",
+});
+
+export const parseAtNiftyHostname = hostnamePrefMapGenerator({
+  hkid: "01",
+});
+
+export const parseSakuraHostname = hostnamePrefMapGenerator({
+  ik: "016010",
+  os: "270000",
+  tk: "130010",
+});
+
+export const parseCoralNetHostname = hostnamePrefMapGenerator({
+  toyama: "16",
+  oyama: "16",
+  kanazawa: "17",
+  anazawa: "17",
 });

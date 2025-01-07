@@ -1,6 +1,8 @@
 import dns from "dns";
 import {
+  parseAtNiftyHostname,
   parseCommufaHostname,
+  parseCoralNetHostname,
   parseEoNetHostname,
   parseGmoIspHostname,
   parseHiHoHostname,
@@ -128,10 +130,13 @@ export const getGeoPrefIdHostname = async (
     }
 
     if (hostname.endsWith(".vectant.ne.jp")) {
-      const vectant = hostname.match(/\.([a-z]+)\.(fdn|otk)\.vectant\.ne\.jp$/);
+      const vectant =
+        hostname.match(/\.([a-z]+)\.(?:fdn|otk)\.vectant\.ne\.jp$/) ||
+        hostname.match(/\.[a-z]([a-z]+)fl\d+\.vectant\.ne\.jp$/);
       if (vectant && vectant[1]) {
         return parseVectantHostname(vectant[1]);
       }
+      return undefined;
     }
 
     if (hostname.endsWith(".gmo-isp.jp")) {
@@ -139,6 +144,31 @@ export const getGeoPrefIdHostname = async (
       if (gmoIsp && gmoIsp[1]) {
         return parseGmoIspHostname(gmoIsp[1]);
       }
+      return undefined;
+    }
+
+    if (hostname.endsWith(".nifty.ne.jp")) {
+      const atNifty = hostname.match(/\.([a-z]+)\.kotei\.ppp\.nifty\.ne\.jp$/);
+      if (atNifty && atNifty[1]) {
+        return parseAtNiftyHostname(atNifty[1]);
+      }
+      return undefined;
+    }
+
+    if (hostname.endsWith(".sakura.ne.jp")) {
+      const sakura = hostname.match(/([a-z]{2})\d+-.*\.vs\.sakura\.ne\.jp$/);
+      if (sakura && sakura[1]) {
+        return [sakura[1] as GeoPosSuggestion];
+      }
+      return undefined;
+    }
+
+    if (hostname.endsWith(".coralnet.or.jp")) {
+      const coralNet = hostname.match(/\.[a-z]{2}([a-z]+)\.coralnet\.or\.jp$/);
+      if (coralNet && coralNet[1]) {
+        return parseCoralNetHostname(coralNet[1]);
+      }
+      return undefined;
     }
 
     //https://www.george24.com/support/faq/138.php
