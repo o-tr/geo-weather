@@ -265,7 +265,19 @@ export const geoPosData = {
       "与那国島地方": "474020",
     }
   }
-}
+} as const;
+
+type GeoPosData = typeof geoPosData;
+
+type ExtractValues<T> = T extends Record<string, infer U>
+  ? U extends Record<string, any>
+    ? ExtractValues<U>
+    : U
+  : never;
+type FirstTwoChars<T extends string> = T extends `${infer A}${infer B}${string}` ? `${A}${B}` : T;
+
+export type GeoPosId = ExtractValues<GeoPosData>;
+export type GeoPosSuggestion = GeoPosId | FirstTwoChars<ExtractValues<GeoPosData>>;
 
 export const flatGeoPosIds: Record<string, string> = (()=>{
   const result = {} as Record<string, string>;
