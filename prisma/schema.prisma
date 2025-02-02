@@ -14,9 +14,22 @@ datasource db {
 }
 
 model GeoWeather {
-  ip        String   @unique
+  ip        String   @unique @id
   geoId     String
   source    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  userPreferences UserPreferences?
+}
+
+model UserPreferences {
+  id                 Int      @id @default(autoincrement())
+  geoWeather         GeoWeather @relation(fields: [ip], references: [ip])
+  ip                 String   @unique
+  hideLocation       Boolean
+  locale             String
+  autoUpdateInterval Int
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }
