@@ -24,12 +24,12 @@ model GeoWeather {
 }
 
 model UserPreferences {
-  id                 Int      @id @default(autoincrement())
+  id                 Int        @id @default(autoincrement())
   geoWeather         GeoWeather @relation(fields: [ip], references: [ip])
-  ip                 String   @unique
+  ip                 String     @unique
   hideLocation       Boolean
   locale             String
   autoUpdateInterval Int
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
 }
