@@ -10,7 +10,7 @@ export const translations = {
     },
     preferences: {
       hideLocation: "位置情報を非表示にする",
-      language: "言語:",
+      language: "言語/Language:",
       updateInterval: "自動更新間隔:",
       intervals: {
         "1hour": "1時間",
@@ -46,7 +46,7 @@ export const translations = {
     },
     preferences: {
       hideLocation: "Hide location information",
-      language: "Language:",
+      language: "言語/Language:",
       updateInterval: "Auto-update interval:",
       intervals: {
         "1hour": "1 hour",
