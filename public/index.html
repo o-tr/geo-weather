@@ -1,20 +1,51 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>位置情報更新用ページ</title>
-  <script src="./static/script.js"></script>
+  <title>設定</title>
+  <script src="./static/preferences.js"></script>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <link rel="stylesheet" href="./static/style.css">
 </head>
 <body>
-  <div id="list"></div>
+  <nav class="navigation">
+    <a href="./location.html" class="nav-link" data-i18n="nav.location">地域設定</a>
+  </nav>
+  <div class="preferences">
+    <div class="preference-item">
+      <label for="hideLocation">
+        <input type="checkbox" id="hideLocation">
+        <span class="label-text">位置情報を非表示にする</span>
+      </label>
+    </div>
+    <div class="preference-item">
+      <label for="locale">
+        <span class="label-text">言語:</span>
+        <select id="locale">
+          <option value="ja">日本語</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+    </div>
+    <div class="preference-item">
+      <label for="autoUpdateInterval">
+        <span class="label-text">自動更新間隔:</span>
+        <select id="autoUpdateInterval">
+          <option value="3600">1時間</option>
+          <option value="7200">2時間</option>
+          <option value="10800">3時間</option>
+          <option value="21600">6時間</option>
+          <option value="43200">12時間</option>
+        </select>
+      </label>
+    </div>
+  </div>
   <div class="control">
     <div class="cf-turnstile" data-sitekey="0x4AAAAAAAgJ5E_M26j7nc2x" data-callback="onSuccess" data-theme="light"></div>
-    <button id="update">更新する</button>
+    <button id="update">保存</button>
   </div>
 </body>
 </html>

@@ -3,7 +3,30 @@ window.onSuccess = (val)=>{
   token = val;
 };
 
+const updateUI = (locale, t) => {
+  document.documentElement.lang = locale;
+  document.title = t.title.location;
+  document.querySelector('.nav-link').textContent = t.nav.settings;
+  document.getElementById('update').textContent = t.buttons.update;
+};
+
 const main = async() => {
+  // Get current locale from preferences
+  const preferences = await fetch('/api/v1/preferences');
+  const preferencesData = await preferences.json();
+  let currentLocale = 'ja';
+  if (preferencesData.status === 'success' && preferencesData.data) {
+    currentLocale = preferencesData.data.locale;
+  }
+
+  // Get translations
+  const translationsResponse = await fetch('/api/v1/translations');
+  const translations = await translationsResponse.json();
+  const t = translations[currentLocale];
+
+  // Update UI with current locale
+  updateUI(currentLocale, t);
+
   const [positions,weather] = await Promise.all([await fetch('/api/v1/geo-list'), await fetch('/api')]);
   const data = (await positions.json()).data;
   const weatherData = await weather.json();
@@ -75,11 +98,11 @@ const main = async() => {
   update.addEventListener('click', async() => {
     const city = document.querySelector('input[name="city"]:checked');
     if (!city){
-      alert('都道府県を選択してください');
+      alert(t.messages.selectRegion);
       return;
     }
     if(!token){
-      alert('CAPTCHAの認証を行ってください');
+      alert(t.messages.captchaRequired);
       return;
     }
     const res = await fetch('/api/v1/save-geo-id', {
@@ -91,11 +114,11 @@ const main = async() => {
     });
     const json = await res.json();
     if (json.status === 'success'){
-      alert('情報を更新しました');
+      alert(t.messages.updateSuccess);
       location.reload()
       return;
     }else if (json.status === 'error'){
-      alert('エラーが発生しました\n開発者にお問い合わせください');
+      alert(t.messages.updateError);
       return;
     }
   });
