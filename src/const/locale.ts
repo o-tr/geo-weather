@@ -13,6 +13,7 @@ export const translations = {
       language: "言語/Language:",
       updateInterval: "自動更新間隔:",
       intervals: {
+        "disabled": "無効",
         "1hour": "1時間",
         "2hours": "2時間",
         "3hours": "3時間",
@@ -49,6 +50,7 @@ export const translations = {
       language: "言語/Language:",
       updateInterval: "Auto-update interval:",
       intervals: {
+        "disabled": "Disabled",
         "1hour": "1 hour",
         "2hours": "2 hours",
         "3hours": "3 hours",

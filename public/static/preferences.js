@@ -30,8 +30,8 @@ const updateUI = (locale, t) => {
   // Update interval options
   const intervalSelect = document.getElementById('autoUpdateInterval');
   const currentInterval = intervalSelect.value;
-  const intervalValues = [3600, 7200, 10800, 21600, 43200];
-  const intervalKeys = ["1hour", "2hours", "3hours", "6hours", "12hours"];
+  const intervalValues = [-1, 3600, 7200, 10800, 21600, 43200];
+  const intervalKeys = ["disabled", "1hour", "2hours", "3hours", "6hours", "12hours"];
   intervalSelect.innerHTML = '';
   intervalValues.forEach((value, index) => {
     const option = document.createElement('option');
