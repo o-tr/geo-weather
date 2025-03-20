@@ -1,35 +1,22 @@
-import {Hono} from "hono";
-import {getRequestIp} from "@/utils/getRequestIp";
-import {getGeoPosId} from "@/utils/getGeoPosId";
-import {getWeather} from "@/utils/getWeather";
-import {getOverview} from "@/utils/getOverview";
-import {prisma} from "@/lib/prisma";
+import { Hono } from "hono";
+import { getRequestIp } from "@/utils/getRequestIp";
+import { getGeoPosId } from "@/utils/getGeoPosId";
+import { getWeather } from "@/utils/getWeather";
+import { getOverview } from "@/utils/getOverview";
+import { prisma } from "@/lib/prisma";
 
 export const registerApiIndex = (app: Hono) => {
-  app.get('/api',async(c)=>{
+  app.get("/api", async (c) => {
     const ip = getRequestIp(c);
-    const {source, geoId:geoPosId} = await getGeoPosId(ip,c);
-    try{
-      const weather =  getWeather(geoPosId);
+    const { source, geoId: geoPosId } = await getGeoPosId(ip, c);
+    try {
+      const weather = getWeather(geoPosId);
       const overviewItem = getOverview(geoPosId);
-      const preferences = prisma.userPreferences.findUnique({
-        where: { ip }
-      });
-      const [forecast, overview, userPrefs] = await Promise.all([
+      const [forecast, overview, userPreferences] = await Promise.all([
         await weather.data,
         await overviewItem.data,
-        preferences
+        await getPreferences(ip, geoPosId),
       ]);
-      
-      // デフォルトの設定値
-      const defaultPreferences = {
-        hideLocation: false,
-        locale: geoPosId.startsWith("loc:") ? "en" : "ja",
-        autoUpdateInterval: 21600 // 6時間
-      };
-      
-      // ユーザー設定とデフォルト値をマージ
-      const userPreferences = userPrefs || defaultPreferences;
 
       return c.json({
         weather: forecast.data.weather,
@@ -52,15 +39,30 @@ export const registerApiIndex = (app: Hono) => {
           },
           geoSource: source,
         },
-        status: "success"
+        status: "success",
       });
-    }catch (e){
-      console.error(e)
+    } catch (e) {
+      console.error(e);
       return c.json({
         status: "failed",
         error: e,
         geoPosId: geoPosId,
       });
     }
-  })
-}
+  });
+};
+
+const getPreferences = async (ip: string, geoPosId: string) => {
+  try {
+    return prisma.userPreferences.findUnique({
+      where: { ip },
+    });
+  } catch (e) {
+    console.error(e);
+    return {
+      hideLocation: false,
+      locale: geoPosId.startsWith("loc:") ? "en" : "ja",
+      autoUpdateInterval: 21600, // 6時間
+    };
+  }
+};
