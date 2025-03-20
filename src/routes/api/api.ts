@@ -54,7 +54,7 @@ export const registerApiIndex = (app: Hono) => {
 
 const getPreferences = async (ip: string, geoPosId: string) => {
   try {
-    return prisma.userPreferences.findUnique({
+    return await prisma.userPreferences.findUnique({
       where: { ip },
     });
   } catch (e) {
