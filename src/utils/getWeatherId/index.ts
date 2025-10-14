@@ -1,4 +1,4 @@
-import {geoIdMap} from "./geoIdMap";
+import { geoIdMap } from "./geoIdMap";
 
 export const getWeatherId = (geoId: string) => {
   for (const [weatherId, geoIds] of geoIdMap) {
@@ -7,4 +7,4 @@ export const getWeatherId = (geoId: string) => {
     }
   }
   return "130000";
-}
+};

@@ -46,4 +46,4 @@ export const defaultGeoPos = {
   "45": "450010",
   "46": "460010",
   "47": "471010",
-} as {[key: string]: string}
+} as { [key: string]: string };

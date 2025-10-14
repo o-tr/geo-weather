@@ -1,21 +1,32 @@
-import { fetchWeatherApi } from 'openmeteo';
-import {ForecastItem, FormattedWeather} from "@/types/weather";
-import {getFormattedDate} from "@/utils/getWeather/format/getFormattedDate";
-import {getJMAfromWMO} from "@/utils/getJMAfromWMO";
-import {getWeatherLabel} from "@/utils/getWeather/format/getWeatherLabels";
+import { fetchWeatherApi } from "openmeteo";
+import type { ForecastItem, FormattedWeather } from "@/types/weather";
+import { getJMAfromWMO } from "@/utils/getJMAfromWMO";
+import { getFormattedDate } from "@/utils/getWeather/format/getFormattedDate";
+import { getWeatherLabel } from "@/utils/getWeather/format/getWeatherLabels";
 
-const ApiEndpoint = process.env.OPEN_METEO_API_ENDPOINT??"https://api.open-meteo.com/v1/forecast";
+const ApiEndpoint =
+  process.env.OPEN_METEO_API_ENDPOINT ??
+  "https://api.open-meteo.com/v1/forecast";
 
-export const getOpenMeteoWeather = async (geoId: string): Promise<{data: FormattedWeather, source: string}> => {
-  const match = geoId.match(/^loc:(?<lat>-?[0-9.]+),(?<long>-?[0-9.]+):(?<tz>.*?):(?<region>.*?):(?<city>.*?)$/);
+export const getOpenMeteoWeather = async (
+  geoId: string,
+): Promise<{ data: FormattedWeather; source: string }> => {
+  const match = geoId.match(
+    /^loc:(?<lat>-?[0-9.]+),(?<long>-?[0-9.]+):(?<tz>.*?):(?<region>.*?):(?<city>.*?)$/,
+  );
   if (!match || !match.groups) {
     throw new Error("Invalid geoId");
   }
   const params = {
-    "latitude": match.groups.lat,
-    "longitude": match.groups.long,
-    "daily": ["weather_code", "temperature_2m_max", "temperature_2m_min", "precipitation_probability_max"],
-    "timezone": match.groups.tz,
+    latitude: match.groups.lat,
+    longitude: match.groups.long,
+    daily: [
+      "weather_code",
+      "temperature_2m_max",
+      "temperature_2m_min",
+      "precipitation_probability_max",
+    ],
+    timezone: match.groups.tz,
   };
   const responses = await fetchWeatherApi(ApiEndpoint, params);
 
@@ -25,27 +36,28 @@ export const getOpenMeteoWeather = async (geoId: string): Promise<{data: Formatt
   const response = responses[0];
 
   const utcOffsetSeconds = response.utcOffsetSeconds();
-  const timezone = response.timezone();
-  const timezoneAbbreviation = response.timezoneAbbreviation();
-  const latitude = response.latitude();
-  const longitude = response.longitude();
+  const _timezone = response.timezone();
+  const _timezoneAbbreviation = response.timezoneAbbreviation();
+  const _latitude = response.latitude();
+  const _longitude = response.longitude();
 
-  const daily = response.daily()!;
+  const daily = response.daily();
 
   const weatherData = {
     daily: {
-      time: range(Number(daily.time()), Number(daily.timeEnd()), daily.interval()).map(
-        (t) => new Date((t + utcOffsetSeconds) * 1000)
-      ),
-      weatherCode: daily.variables(0)!.valuesArray()!,
-      temperature2mMax: daily.variables(1)!.valuesArray()!,
-      temperature2mMin: daily.variables(2)!.valuesArray()!,
-      precipitationProbabilityMax: daily.variables(3)!.valuesArray()!,
+      time: range(
+        Number(daily?.time()),
+        Number(daily?.timeEnd()),
+        daily?.interval() ?? 86400,
+      ).map((t) => new Date((t + utcOffsetSeconds) * 1000)),
+      weatherCode: daily?.variables(0)?.valuesArray() ?? [],
+      temperature2mMax: daily?.variables(1)?.valuesArray() ?? [],
+      temperature2mMin: daily?.variables(2)?.valuesArray() ?? [],
+      precipitationProbabilityMax: daily?.variables(3)?.valuesArray() ?? [],
     },
-
   };
 
-  const weather:ForecastItem[] = [];
+  const weather: ForecastItem[] = [];
 
   for (let i = 0; i < weatherData.daily.time.length; i++) {
     const pop = weatherData.daily.precipitationProbabilityMax[i];
@@ -56,7 +68,7 @@ export const getOpenMeteoWeather = async (geoId: string): Promise<{data: Formatt
       weather: `${getWeatherLabel(`${weatherCode}`, "EN")}`,
       tempMin: `${Math.round(weatherData.daily.temperature2mMin[i])}`,
       tempMax: `${Math.round(weatherData.daily.temperature2mMax[i])}`,
-      pop: pop===undefined||Number.isNaN(pop) ? "-" : `${pop}%`,
+      pop: pop === undefined || Number.isNaN(pop) ? "-" : `${pop}%`,
     });
   }
 
@@ -68,5 +80,5 @@ export const getOpenMeteoWeather = async (geoId: string): Promise<{data: Formatt
       weather,
     },
     source: "local open-meteo API",
-  }
-}
+  };
+};

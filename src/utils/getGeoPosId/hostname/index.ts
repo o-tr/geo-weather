@@ -1,11 +1,11 @@
-import dns from "dns";
+import dns from "node:dns";
+import type { GeoPosSuggestion } from "@/const/geo-pos-list";
 import { HostnameParserMap } from "./hostname-map";
-import { GeoPosSuggestion } from "@/const/geo-pos-list";
-import { ProviderMap } from "./provider-map";
 import { IgnoreIsps } from "./ignore-isp";
+import { ProviderMap } from "./provider-map";
 
 export const getGeoPrefIdHostname = async (
-  ip: string
+  ip: string,
 ): Promise<GeoPosSuggestion[] | undefined> => {
   try {
     const hostnames = await dns.promises.reverse(ip);

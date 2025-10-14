@@ -99,4 +99,4 @@ export const jmaMap: Record<number, number> = {
   97: 450,
   98: 450,
   99: 450,
-}
+};
