@@ -5,7 +5,13 @@ import { getGeoPrefIdHostname } from "./hostname";
 import { getGeoPosIdIPInfo } from "./ipinfo";
 import { geoGeoPosIdCached } from "./user";
 
-export const getGeoPosId = async (ip: string, c: Context) => {
+export const getGeoPosId = async (
+  ip: string,
+  c: Context,
+): Promise<{
+  source: string;
+  geoId: string;
+}> => {
   const queryId = c.req.queries("geoPosId")?.[0];
   if (queryId && geoPosIds.includes(queryId)) {
     console.log(
@@ -40,26 +46,41 @@ export const getGeoPosId = async (ip: string, c: Context) => {
     };
   } catch {}
 
-  const prefId = await getGeoPrefIdHostname(ip);
-  try {
-    const geoPosId = await getGeoPosIdIPInfo(ip);
-    if (!prefId || prefId.some((v) => geoPosId?.startsWith(v))) {
-      console.log(
-        JSON.stringify({
-          date: Date.now(),
-          ip,
-          prefId: prefId ?? "none",
-          geoPosId,
-          source: "ipinfo",
-        }),
-      );
-      return {
+  const [prefId, geoPosId] = await Promise.all([
+    getGeoPrefIdHostname(ip),
+    getGeoPosIdIPInfo(ip).catch(() => undefined),
+  ]);
+
+  if (prefId?.length === 1 && prefId[0].length === 6) {
+    console.log(
+      JSON.stringify({
+        date: Date.now(),
+        ip,
+        prefId,
+        geoPosId: prefId[0],
+        source: "hostname",
+      }),
+    );
+    return {
+      source: "hostname",
+      geoId: prefId[0],
+    };
+  }
+
+  if ((!prefId || prefId.some((v) => geoPosId?.startsWith(v))) && geoPosId) {
+    console.log(
+      JSON.stringify({
+        date: Date.now(),
+        ip,
+        prefId: prefId ?? "none",
+        geoPosId,
         source: "ipinfo",
-        geoId: geoPosId,
-      };
-    }
-  } catch (e) {
-    console.log(e);
+      }),
+    );
+    return {
+      source: "ipinfo",
+      geoId: geoPosId,
+    };
   }
 
   if (prefId?.[0]) {
