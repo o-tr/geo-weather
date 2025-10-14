@@ -11,6 +11,7 @@ const log = (data: {
   geoId: string;
   source: string;
   hostname: string | undefined;
+  phase: string;
 }) => {
   console.log(
     JSON.stringify({
@@ -20,6 +21,7 @@ const log = (data: {
       geoId: data.geoId,
       source: data.source,
       hostname: data.hostname,
+      phase: data.phase,
     }),
   );
 };
@@ -31,6 +33,7 @@ export const getGeoPosId = async (
   source: string;
   geoId: string;
   hostname: string | undefined;
+  suggestions: string[] | undefined;
 }> => {
   const queryId = c.req.queries("geoPosId")?.[0];
   if (queryId && geoPosIds.includes(queryId)) {
@@ -40,11 +43,13 @@ export const getGeoPosId = async (
       geoId: queryId,
       hostname: undefined,
       source: "query",
+      phase: "query",
     });
     return {
       source: "query",
       geoId: queryId,
       hostname: undefined,
+      suggestions: undefined,
     };
   }
 
@@ -56,11 +61,13 @@ export const getGeoPosId = async (
       geoId,
       hostname: undefined,
       source,
+      phase: "user",
     });
     return {
       source: source,
       geoId: geoId,
       hostname: undefined,
+      suggestions: undefined,
     };
   } catch {}
 
@@ -76,11 +83,13 @@ export const getGeoPosId = async (
       geoId: suggestions[0],
       hostname,
       source: "hostname",
+      phase: "suggestions with 1 length",
     });
     return {
       source: "hostname",
       geoId: suggestions[0],
       hostname,
+      suggestions,
     };
   }
 
@@ -94,11 +103,13 @@ export const getGeoPosId = async (
       geoId: geoPosId,
       hostname,
       source: "ipinfo",
+      phase: "ipinfo with suggestions",
     });
     return {
       source: "ipinfo",
       geoId: geoPosId,
       hostname,
+      suggestions,
     };
   }
 
@@ -109,31 +120,36 @@ export const getGeoPosId = async (
       geoId: defaultGeoPos[suggestions[0]],
       hostname,
       source: "hostname",
+      phase: "fallback to first suggestion",
     });
     if (suggestions[0].length === 6) {
       return {
         source: "hostname",
         geoId: suggestions[0],
         hostname,
+        suggestions,
       };
     }
     return {
       source: "hostname",
       geoId: defaultGeoPos[suggestions[0]],
       hostname,
+      suggestions,
     };
   }
 
   log({
     ip,
-    suggestions: undefined,
+    suggestions,
     geoId: "130010",
     hostname: undefined,
     source: "fallback",
+    phase: "fallback to default geoId",
   });
   return {
     source: "fallback",
     geoId: "130010",
     hostname,
+    suggestions,
   };
 };
