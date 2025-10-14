@@ -2,13 +2,15 @@ import dns from "node:dns";
 import type { GeoPosSuggestion } from "@/const/geo-pos-list";
 import { HostnameParserMap } from "./hostname-map";
 import { IgnoreIsps } from "./ignore-isp";
-import { ProviderMap } from "./provider-map";
+import { ProviderMap, ProviderInfoByDomain } from "./provider-map";
+import type { ProviderInfo } from "./types";
 
 export const getGeoPrefIdHostname = async (
   ip: string,
 ): Promise<{
   suggestions?: GeoPosSuggestion[];
   hostname?: string;
+  providerInfo?: ProviderInfo;
 }> => {
   try {
     const hostnames = await dns.promises.reverse(ip);
@@ -32,13 +34,21 @@ export const getGeoPrefIdHostname = async (
       return {
         suggestions: ProviderMap[hostname2],
         hostname,
+        providerInfo: ProviderInfoByDomain[hostname2],
       };
     }
     if (HostnameParserMap[hostname2]) {
-      const suggestions = HostnameParserMap[hostname2](hostname);
+      const parserInfo = HostnameParserMap[hostname2];
+      const suggestions = parserInfo.parser(hostname);
       return {
         suggestions,
         hostname,
+        providerInfo: {
+          name: parserInfo.name,
+          domains: [parserInfo.domain],
+          geoIds: suggestions || [],
+          description: parserInfo.description,
+        },
       };
     }
     const hostname3 = hostnameParts.slice(-3).join(".");
@@ -52,13 +62,21 @@ export const getGeoPrefIdHostname = async (
       return {
         suggestions: ProviderMap[hostname3],
         hostname,
+        providerInfo: ProviderInfoByDomain[hostname3],
       };
     }
     if (HostnameParserMap[hostname3]) {
-      const suggestions = HostnameParserMap[hostname3](hostname);
+      const parserInfo = HostnameParserMap[hostname3];
+      const suggestions = parserInfo.parser(hostname);
       return {
         suggestions,
         hostname,
+        providerInfo: {
+          name: parserInfo.name,
+          domains: [parserInfo.domain],
+          geoIds: suggestions || [],
+          description: parserInfo.description,
+        },
       };
     }
   } catch {}
