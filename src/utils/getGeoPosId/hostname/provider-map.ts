@@ -417,9 +417,10 @@ export const ProviderInfoList: ProviderInfo[] = [
       "兵庫県神戸市・芦屋市・宝塚市・川西市・明石市、京都府京都市・長岡京市・向日市・乙訓郡大山崎町、大阪府大阪市吹田市・茨木市・豊中市・池田市・摂津市・三島郡島本町",
   },
   {
-    name: "千葉ニュータウンセンター",
+    name: "ジェイコム千葉セントラル",
     domains: ["cnc.jp"],
     geoIds: ["120010"],
+    url: "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%82%A7%E3%82%A4%E3%82%B3%E3%83%A0%E5%8D%83%E8%91%89%E3%82%BB%E3%83%B3%E3%83%88%E3%83%A9%E3%83%AB",
     coverage: "千葉県千葉市",
   },
   {
@@ -530,9 +531,10 @@ export const ProviderInfoList: ProviderInfo[] = [
     coverage: "青森県青森市",
   },
   {
-    name: "足立ケーブルテレビ(株)",
+    name: "株式会社ジェイコム足立",
     domains: ["adachi.ne.jp"],
     geoIds: ["130010"],
+    url: "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%82%A7%E3%82%A4%E3%82%B3%E3%83%A0%E8%B6%B3%E7%AB%8B",
     coverage: "東京都足立区",
   },
   {
@@ -547,6 +549,7 @@ export const ProviderInfoList: ProviderInfo[] = [
     name: "株式会社アイティービー",
     domains: ["amigo.ne.jp", "amigo2.ne.jp"],
     geoIds: ["240020", "240010"],
+    url: "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%A4%E3%83%86%E3%82%A3%E3%83%BC%E3%83%93%E3%83%BC",
     coverage: "三重県伊勢市 度会郡 多気郡 志摩市 松阪市 南伊勢町",
   },
   {
@@ -623,8 +626,9 @@ export const ProviderInfoList: ProviderInfo[] = [
   },
   {
     name: "J:COM市川",
-    domains: ["c3-net.ne.jp"],
+    domains: ["c3-net.ne.jp", "icnet.ne.jp"],
     geoIds: ["140010"],
+    url: "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%82%A7%E3%82%A4%E3%82%B3%E3%83%A0%E5%B8%82%E5%B7%9D",
     coverage: "横浜市",
   },
   {
@@ -830,12 +834,6 @@ export const ProviderInfoList: ProviderInfo[] = [
     coverage: "神奈川県 湯河原町、静岡県 熱海市  伊東市  下田市  東伊豆町",
   },
   {
-    name: "ジェイコム市川",
-    domains: ["icnet.ne.jp"],
-    geoIds: ["120010"],
-    coverage: "千葉県 市川市",
-  },
-  {
     name: "伊賀上野ケーブルテレビ(株)",
     domains: ["ict.ne.jp"],
     geoIds: ["240010"],
@@ -910,12 +908,14 @@ export const ProviderInfoList: ProviderInfo[] = [
     name: "ジェイコム東京北",
     domains: ["kitanet.ne.jp"],
     geoIds: ["130010"],
+    url: "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%82%A7%E3%82%A4%E3%82%B3%E3%83%A0%E6%9D%B1%E4%BA%AC%E5%8C%97",
     coverage: "東京都北区",
   },
   {
     name: "ジェイコム東葛葛飾",
     domains: ["koalanet.ne.jp"],
     geoIds: ["120010", "130010"],
+    url: "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%82%A7%E3%82%A4%E3%82%B3%E3%83%A0%E6%9D%B1%E8%91%9B%E8%91%9B%E9%A3%BE",
     coverage: "千葉県 流山市 野田市 松戸市、東京都 葛飾区",
   },
   {
@@ -1086,6 +1086,7 @@ export const ProviderInfoList: ProviderInfo[] = [
     name: "J:COM 港・新宿",
     domains: ["rosenet.ne.jp"],
     geoIds: ["130010"],
+    url: "https://ja.wikipedia.org/wiki/J:COM_%E6%B8%AF%E3%83%BB%E6%96%B0%E5%AE%BF",
     coverage: "東京都 港区 新宿区",
   },
   {
@@ -1242,6 +1243,7 @@ export const ProviderInfoList: ProviderInfo[] = [
       "300010",
       "260010",
     ],
+    url: "https://www.ztv.co.jp/",
     coverage:
       "三重県 津市 松阪市 亀山市 尾鷲市 北牟婁郡紀北町 熊野市 南牟婁郡御浜町 紀宝町 伊勢市 鳥羽市 志摩市 度会郡玉城町 度会町 南伊勢町、滋賀県 彦根市 長浜市 米原市 高島市 大津市 草津市 守山市 栗東市 野洲市 湖南市 近江八幡市 蒲生郡竜王町、和歌山県 新宮市 田辺市 東牟婁郡串本町 那智勝浦町 太地町 古座川町 北山村 日高郡日高町 由良町 日高川町 有田郡広川町、京都府 京都市西京区 亀岡市 船井郡京丹波町",
   },
@@ -1277,36 +1279,42 @@ export const ProviderInfoList: ProviderInfo[] = [
     name: "東京電機大学",
     domains: ["dendai.ac.jp"],
     geoIds: ["130010", "110020", "120010"],
+    url: "https://www.dendai.ac.jp/",
     coverage: "東京都足立区,埼玉県比企郡鳩山町,千葉県印西市",
   },
   {
     name: "東京芸術大学",
     domains: ["geidai.ac.jp"],
     geoIds: ["130010", "080020", "140010"],
+    url: "https://www.geidai.ac.jp/",
     coverage: "東京都台東区,東京都足立区,茨城県取手市,神奈川県横浜市中区",
   },
   {
     name: "広島大学",
     domains: ["hiroshima-u.ac.jp"],
     geoIds: ["340010"],
+    url: "https://www.hiroshima-u.ac.jp/",
     coverage: "広島県東広島市,広島市南区,広島市中区",
   },
   {
     name: "北陸先端科学技術大学院大学",
     domains: ["jaist.ac.jp"],
     geoIds: ["170010", "130010"],
+    url: "https://www.jaist.ac.jp/index.html",
     coverage: "石川県能美市,石川県金沢市,東京都港区",
   },
   {
     name: "関東学院大学",
     domains: ["kanto-gakuin.ac.jp"],
     geoIds: ["140010"],
+    url: "https://univ.kanto-gakuin.ac.jp/",
     coverage: "神奈川県横浜市",
   },
   {
     name: "慶應義塾大学",
     domains: ["keio.ac.jp"],
     geoIds: ["130010", "140010", "110010", "270000", "060030"],
+    url: "https://www.keio.ac.jp/ja/",
     coverage:
       "東京都,神奈川県横浜市,神奈川県藤沢市,埼玉県さいたま市,神奈川県川崎市,山形県鶴岡市,大阪市",
   },
@@ -1314,48 +1322,56 @@ export const ProviderInfoList: ProviderInfo[] = [
     name: "京都精華大学",
     domains: ["kyoto-seika.ac.jp"],
     geoIds: ["260010"],
+    url: "https://www.kyoto-seika.ac.jp/",
     coverage: "京都府京都市",
   },
   {
     name: "日本工業大学",
     domains: ["nit.ac.jp"],
     geoIds: ["110010"],
+    url: "https://www.nit.ac.jp/",
     coverage: "埼玉県南埼玉郡宮代町",
   },
   {
     name: "沼津工業高等専門学校",
     domains: ["numazu-ct.ac.jp"],
     geoIds: ["220030"],
+    url: "https://www.numazu-ct.ac.jp/",
     coverage: "静岡県沼津市",
   },
   {
     name: "大阪工業大学",
     domains: ["oit.ac.jp"],
     geoIds: ["270000"],
+    url: "https://www.oit.ac.jp/index.html",
     coverage: "大阪府大阪市",
   },
   {
     name: "和歌山大学",
     domains: ["wakayama-u.ac.jp"],
     geoIds: ["300010"],
+    url: "https://www.wakayama-u.ac.jp/",
     coverage: "和歌山県和歌山市",
   },
   {
     name: "山梨大学",
     domains: ["yamanashi.ac.jp"],
     geoIds: ["190010"],
+    url: "https://www.yamanashi.ac.jp/",
     coverage: "山梨県甲府市,中央市",
   },
   {
     name: "中部テレコミュニケーション",
     domains: ["ctc.ad.jp"],
     geoIds: ["23", "21", "24", "22", "20"],
+    url: "https://www.ctc.co.jp/",
     coverage: "愛知,岐阜,三重,静岡,長野",
   },
   {
     name: "エクストライド",
     domains: ["extride.ad.jp"],
     geoIds: ["430040"],
+    url: "https://www.extride.ad.jp/",
     coverage: "熊本県人吉市",
   },
   {
@@ -1370,13 +1386,15 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["ix1.co.jp"],
     geoIds: ["15"],
     description: "新潟っぽい",
+    url: "https://www.ncom.ad.jp/overview.htm",
     coverage: "新潟",
   },
   {
     name: "オプテージ",
     domains: ["dsn.jp"],
     geoIds: ["25", "26", "27", "28", "29", "30"],
-    description: "一旦EO光と同じエリアにしておく",
+    description: "EO光の運営会社なので一旦EO光と同じエリアにしておく",
+    url: "https://optage.co.jp/",
     coverage: "関西地方",
   },
   {
@@ -1384,6 +1402,7 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["j-cnet.jp"],
     geoIds: ["10", "11", "12", "13", "14"],
     description: "ホスト名的に関東近辺だと思われる",
+    url: "https://www.jcom.co.jp/",
     coverage: "関東近辺",
   },
   {
@@ -1422,10 +1441,11 @@ export const ProviderInfoList: ProviderInfo[] = [
     coverage: "長野市,上田市 ,大町市",
   },
   {
-    name: "オープン埼玉ネットワーク",
+    name: "ケーブルネット埼玉株式会社",
     domains: ["cablenet.ne.jp"],
-    geoIds: ["11"],
-    coverage: "埼玉県",
+    geoIds: ["110010"],
+    url: "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%82%A7%E3%82%A4%E3%82%B3%E3%83%A0%E5%B7%9D%E5%8F%A3%E6%88%B8%E7%94%B0",
+    coverage: "埼玉県 川口市 戸田市",
   },
   {
     name: "(株)ケーブルテレビ若狭小浜",
@@ -1489,6 +1509,7 @@ export const ProviderInfoList: ProviderInfo[] = [
     name: "ジェイコム鎌倉",
     domains: ["kamakuranet.ne.jp"],
     geoIds: ["140010"],
+    url: "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%82%A7%E3%82%A4%E3%82%B3%E3%83%A0%E9%8E%8C%E5%80%89",
     coverage: "神奈川県鎌倉市、逗子市",
   },
   {
@@ -1560,6 +1581,7 @@ export const ProviderInfoList: ProviderInfo[] = [
     name: "ジェイコム南横浜",
     domains: ["ttmy.ne.jp"],
     geoIds: ["140010"],
+    url: "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%82%A7%E3%82%A4%E3%82%B3%E3%83%A0%E5%8D%97%E6%A8%AA%E6%B5%9C",
     coverage: "神奈川県横浜市金沢区、港南区、栄区、戸塚区",
   },
   {

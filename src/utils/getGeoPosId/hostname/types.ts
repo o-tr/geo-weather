@@ -5,7 +5,7 @@ export interface ProviderInfo {
   name: string; // プロバイダー名/サービス名
   domains: string[]; // 対応ドメイン
   geoIds: GeoPosSuggestion[]; // 対応地域ID
-  url?: string; // 公式サイトURL
+  url: string; // 公式サイトURL
   description?: string; // 説明/備考
   coverage?: string; // サービス提供エリア（テキスト）
 }
@@ -17,6 +17,7 @@ export interface HostnameParserInfo {
   regex: RegExp | RegExp[]; // マッチングパターン
   prefixMap: Record<string, GeoPosSuggestion | GeoPosSuggestion[]>;
   fallback?: GeoPosSuggestion[]; // フォールバック地域ID
+  url: string; // 公式サイトURL
   description?: string; // 説明
   parser: (hostname: string) => GeoPosSuggestion[] | undefined; // パーサー関数
 }

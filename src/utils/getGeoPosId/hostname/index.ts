@@ -48,6 +48,7 @@ export const getGeoPrefIdHostname = async (
           domains: [parserInfo.domain],
           geoIds: suggestions || [],
           description: parserInfo.description,
+          url: parserInfo.url,
         },
       };
     }
@@ -76,6 +77,7 @@ export const getGeoPrefIdHostname = async (
           domains: [parserInfo.domain],
           geoIds: suggestions || [],
           description: parserInfo.description,
+          url: parserInfo.url,
         },
       };
     }

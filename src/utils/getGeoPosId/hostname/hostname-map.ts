@@ -9,6 +9,7 @@ export const hostnamePrefMapGenerator = (
   map: {
     [key: string]: GeoPosSuggestion | GeoPosSuggestion[];
   },
+  url: string,
   fallback?: GeoPosSuggestion[],
   description?: string,
 ): HostnameParserInfo => {
@@ -45,6 +46,7 @@ export const hostnamePrefMapGenerator = (
     prefixMap: map,
     fallback,
     description,
+    url,
     parser,
   };
 };
@@ -102,6 +104,7 @@ export const parseOcnHostname = hostnamePrefMapGenerator(
     kagoshima: "46",
     okinawa: "47",
   },
+  "https://www.ocn.ne.jp/",
 );
 
 /**
@@ -166,7 +169,7 @@ export const parseOcnHostname = hostnamePrefMapGenerator(
 // );
 
 export const parseMeshHostname = hostnamePrefMapGenerator(
-  "mesh",
+  "biglobe",
   "mesh.ad.jp",
   /\.([a-z0-9]+)\.mesh\.ad\.jp$/,
   {
@@ -225,6 +228,7 @@ export const parseMeshHostname = hostnamePrefMapGenerator(
     kgs: "46",
     okn: "47",
   },
+  "https://www.biglobe.ne.jp/"
 );
 
 export const parseEoNetHostname = hostnamePrefMapGenerator(
@@ -240,6 +244,7 @@ export const parseEoNetHostname = hostnamePrefMapGenerator(
     wky: "30",
     kns: ["25", "26", "27", "28", "29", "30"],
   },
+  "https://eonet.jp/"
 );
 
 /**
@@ -414,6 +419,7 @@ export const parseSoNetHostname = hostnamePrefMapGenerator(
     kgsm: "46",
     oknw: "47",
   },
+  "https://www.so-net.ne.jp/",
 );
 
 export const parseCommufaHostname = hostnamePrefMapGenerator(
@@ -428,6 +434,7 @@ export const parseCommufaHostname = hostnamePrefMapGenerator(
     mie1: "24",
     shizuoka1: "22",
   },
+  "https://www.commufa.jp/"
 );
 
 export const parseNuroHostname = hostnamePrefMapGenerator(
@@ -463,6 +470,7 @@ export const parseNuroHostname = hostnamePrefMapGenerator(
     fkol: "40",
     sagl: "41",
   },
+  "https://www.nuro.jp/",
 );
 
 export const parseVectantHostname = hostnamePrefMapGenerator(
@@ -488,6 +496,7 @@ export const parseVectantHostname = hostnamePrefMapGenerator(
     hiroshima: "34",
     fukuoka: "40",
   },
+  "https://www.arteria-net.com/",
 );
 
 export const parseGmoIspHostname = hostnamePrefMapGenerator(
@@ -511,6 +520,7 @@ export const parseGmoIspHostname = hostnamePrefMapGenerator(
     east: 東日本,
     west: 西日本,
   },
+  "https://gmobb.jp/",
 );
 
 export const parseAtNiftyHostname = hostnamePrefMapGenerator(
@@ -520,6 +530,7 @@ export const parseAtNiftyHostname = hostnamePrefMapGenerator(
   {
     hkid: "01",
   },
+  "https://www.nifty.com/",
 );
 
 export const parseSakuraHostname = hostnamePrefMapGenerator(
@@ -531,6 +542,7 @@ export const parseSakuraHostname = hostnamePrefMapGenerator(
     os: "270000",
     tk: "130010",
   },
+  "https://www.sakura.ad.jp/",
 );
 
 export const parseCoralNetHostname = hostnamePrefMapGenerator(
@@ -543,23 +555,16 @@ export const parseCoralNetHostname = hostnamePrefMapGenerator(
     kanazawa: "17",
     anazawa: "17",
   },
+  "https://www.coralnet.or.jp/",
 );
 
-const parsePlalaHostnameFunc = (hostname: string) => {
-  const plala = hostname.match(/a0(\d\d)\.ap\.plala\.or\.jp$/);
-  if (plala?.[1]) {
-    return [plala[1] as GeoPosSuggestion];
-  }
-  return undefined;
-};
-
-export const parsePlalaHostname: HostnameParserInfo = {
-  name: "ぷらら",
-  domain: "plala.or.jp",
-  regex: /a0(\d\d)\.ap\.plala\.or\.jp$/,
-  prefixMap: {},
-  parser: parsePlalaHostnameFunc,
-};
+const parsePlalaHostname = hostnamePrefMapGenerator(
+  "ぷらら",
+  "plala.or.jp",
+  /a0(\d\d)\.ap\.plala\.or\.jp$/,
+  {},
+  "https://www.plala.or.jp/",
+);
 
 const parseKanazawaCableHostname = hostnamePrefMapGenerator(
   "金沢ケーブル",
@@ -571,6 +576,7 @@ const parseKanazawaCableHostname = hostnamePrefMapGenerator(
     shika: ["170020"],
     tsubata: ["170010"],
   },
+  "https://www.kanazawacable.jp/",
   ["17"],
   "石川県のみ",
 );
