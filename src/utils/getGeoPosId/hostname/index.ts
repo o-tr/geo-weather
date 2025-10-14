@@ -2,7 +2,7 @@ import dns from "node:dns";
 import type { GeoPosSuggestion } from "@/const/geo-pos-list";
 import { HostnameParserMap } from "./hostname-map";
 import { IgnoreIsps } from "./ignore-isp";
-import { ProviderMap, ProviderInfoByDomain } from "./provider-map";
+import { ProviderInfoByDomain, ProviderMap } from "./provider-map";
 import type { ProviderInfo } from "./types";
 
 export const getGeoPrefIdHostname = async (

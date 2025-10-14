@@ -1,6 +1,6 @@
 import type { GeoPosSuggestion } from "@/const/geo-pos-list";
-import type { HostnameParserInfo } from "./types";
 import { 東日本, 西日本 } from "./pos-geoId-map";
+import type { HostnameParserInfo } from "./types";
 
 export const hostnamePrefMapGenerator = (
   name: string,

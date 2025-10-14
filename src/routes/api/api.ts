@@ -8,7 +8,13 @@ import { getWeather } from "@/utils/getWeather";
 export const registerApiIndex = (app: Hono) => {
   app.get("/api", async (c) => {
     const ip = getRequestIp(c);
-    const { source, geoId: geoPosId, hostname, suggestions } = await getGeoPosId(ip, c);
+    const {
+      source,
+      geoId: geoPosId,
+      hostname,
+      suggestions,
+      providerInfo,
+    } = await getGeoPosId(ip, c);
     try {
       const weather = getWeather(geoPosId);
       const overviewItem = getOverview(geoPosId);
@@ -42,6 +48,7 @@ export const registerApiIndex = (app: Hono) => {
             ip: ip,
             hostname: hostname || "unknown",
             suggestions: suggestions,
+            providerInfo: providerInfo,
           },
         },
         status: "success",

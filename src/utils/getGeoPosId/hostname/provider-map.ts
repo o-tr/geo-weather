@@ -1,6 +1,6 @@
 import type { GeoPosSuggestion } from "@/const/geo-pos-list";
-import type { ProviderInfo } from "./types";
 import { 東日本, 西日本 } from "./pos-geoId-map";
+import type { ProviderInfo } from "./types";
 
 export const ProviderInfoList: ProviderInfo[] = [
   {
@@ -118,8 +118,10 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["ncv.co.jp", "ncv.ne.jp", "ncv.jp", "omn.ne.jp", "tlp.ne.jp"],
     geoIds: ["017010", "060020", "070010", "150010"],
     url: "https://www.catv-jcta.jp/search/detail/10110047",
-    description: "北海道函館市,北斗市,七飯町/山形県米沢市,南陽市,高畠町,川西町/福島県福島市/新潟県新潟市北区,新潟市東区,新潟市中央区,新潟市西区のみ",
-    coverage: "北海道函館市,北斗市,七飯町/山形県米沢市,南陽市,高畠町,川西町/福島県福島市/新潟県新潟市北区,新潟市東区,新潟市中央区,新潟市西区",
+    description:
+      "北海道函館市,北斗市,七飯町/山形県米沢市,南陽市,高畠町,川西町/福島県福島市/新潟県新潟市北区,新潟市東区,新潟市中央区,新潟市西区のみ",
+    coverage:
+      "北海道函館市,北斗市,七飯町/山形県米沢市,南陽市,高畠町,川西町/福島県福島市/新潟県新潟市北区,新潟市東区,新潟市中央区,新潟市西区",
   },
   {
     name: "ちゅピＣＯＭ",
@@ -411,7 +413,8 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["bwa.jp"],
     geoIds: ["280010", "260010", "270000"],
     url: "https://www.bwa.jp/service-charge/servicearea/",
-    coverage: "兵庫県神戸市・芦屋市・宝塚市・川西市・明石市、京都府京都市・長岡京市・向日市・乙訓郡大山崎町、大阪府大阪市吹田市・茨木市・豊中市・池田市・摂津市・三島郡島本町",
+    coverage:
+      "兵庫県神戸市・芦屋市・宝塚市・川西市・明石市、京都府京都市・長岡京市・向日市・乙訓郡大山崎町、大阪府大阪市吹田市・茨木市・豊中市・池田市・摂津市・三島郡島本町",
   },
   {
     name: "千葉ニュータウンセンター",
@@ -498,10 +501,18 @@ export const ProviderInfoList: ProviderInfo[] = [
   },
   {
     name: "(株)テレビ岸和田",
-    domains: ["sensyu.ne.jp", "116-sensyu.ne.jp", "117-sensyu.ne.jp", "2-sensyu.ne.jp", "237-sensyu.ne.jp", "240-sensyu.ne.jp"],
+    domains: [
+      "sensyu.ne.jp",
+      "116-sensyu.ne.jp",
+      "117-sensyu.ne.jp",
+      "2-sensyu.ne.jp",
+      "237-sensyu.ne.jp",
+      "240-sensyu.ne.jp",
+    ],
     geoIds: ["270000"],
     url: "https://www.catv-jcta.jp/search/detail/10110333",
-    description: "sensyu.ne.jp以外のドメインは存在しないので逆引き設定多分ミスってる",
+    description:
+      "sensyu.ne.jp以外のドメインは存在しないので逆引き設定多分ミスってる",
     coverage: "大阪府岸和田市  忠岡町",
   },
   {
@@ -529,7 +540,8 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["aitai.ne.jp"],
     geoIds: ["230010", "230020", "210010", "210020"],
     url: "http://www.aitai.ne.jp/",
-    coverage: "豊田市/みよし市/長久手市 蒲郡市/幸田町 多治見市/土岐市/瑞浪市 岐阜市/北方町/岐南町/笠松町 各務原市川島/羽島市/関市/美濃市 瑞穂市/山県市/下呂市",
+    coverage:
+      "豊田市/みよし市/長久手市 蒲郡市/幸田町 多治見市/土岐市/瑞浪市 岐阜市/北方町/岐南町/笠松町 各務原市川島/羽島市/関市/美濃市 瑞穂市/山県市/下呂市",
   },
   {
     name: "株式会社アイティービー",
@@ -584,14 +596,16 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["bai.ne.jp"],
     geoIds: ["270000", "280010"],
     url: "https://www.catv-jcta.jp/search/detail/10110350",
-    coverage: "大阪府,兵庫県 神戸市北区  尼崎市  西宮市  伊丹市  宝塚市  川西市",
+    coverage:
+      "大阪府,兵庫県 神戸市北区  尼崎市  西宮市  伊丹市  宝塚市  川西市",
   },
   {
     name: "ＢＴＶ(株)",
     domains: ["btvm.ne.jp"],
     geoIds: ["450030", "450010", "460010", "460020"],
     url: "https://www.catv-jcta.jp/search/detail/10110496",
-    coverage: "宮崎県都城市  日南市  小林市  三股町  高原町  鹿児島県鹿児島市  曽於市  志布志市",
+    coverage:
+      "宮崎県都城市  日南市  小林市  三股町  高原町  鹿児島県鹿児島市  曽於市  志布志市",
   },
   {
     name: "佐賀シティビジョン(株)",
@@ -632,7 +646,8 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["catv296.ne.jp"],
     geoIds: ["120010", "120020"],
     url: "https://www.catv-jcta.jp/search/detail/10110127",
-    coverage: "千葉県千葉市花見川区  千葉市若葉区  千葉市緑区  茂原市  成田市  佐倉市  東金市  四街道市  八街市  印西市  富里市  香取市  山武市  大網白里市  酒々井町  栄町  神崎町",
+    coverage:
+      "千葉県千葉市花見川区  千葉市若葉区  千葉市緑区  茂原市  成田市  佐倉市  東金市  四街道市  八街市  印西市  富里市  香取市  山武市  大網白里市  酒々井町  栄町  神崎町",
   },
   {
     name: "(株)ダイバーシティメディア",
@@ -646,7 +661,8 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["cc9.ne.jp"],
     geoIds: ["080020", "090010", "100010"],
     url: "https://www.catv-jcta.jp/search/detail/10110059",
-    coverage: "茨城県結城市  筑西市 栃木県栃木市  下野市  上三川町  壬生町 群馬県館林市  板倉町  明和町  千代田町  邑楽町",
+    coverage:
+      "茨城県結城市  筑西市 栃木県栃木市  下野市  上三川町  壬生町 群馬県館林市  板倉町  明和町  千代田町  邑楽町",
   },
   {
     name: "(株)ケーブル・ジョイ",
@@ -660,21 +676,24 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["ccnet-ai.ne.jp", "ccnet.ne.jp", "ccnw.ne.jp", "ccnetmie.ne.jp"],
     geoIds: ["210010", "230010", "230020", "240010"],
     url: "https://www.catv-jcta.jp/search/detail/10110239",
-    coverage: "岐阜県美濃加茂市  各務原市  本巣市  養老町  川辺町  八百津町  白川町、愛知県名古屋市緑区  春日井市  豊川市  犬山市  小牧市  豊明市  日進市  東郷町  大口町  扶桑町、三重県桑名市  朝日町  川越町",
+    coverage:
+      "岐阜県美濃加茂市  各務原市  本巣市  養老町  川辺町  八百津町  白川町、愛知県名古屋市緑区  春日井市  豊川市  犬山市  小牧市  豊明市  日進市  東郷町  大口町  扶桑町、三重県桑名市  朝日町  川越町",
   },
   {
     name: "(株)中海テレビ放送",
     domains: ["chukai.ne.jp"],
     geoIds: ["310020"],
     url: "https://www.catv-jcta.jp/search/detail/10110361",
-    coverage: "鳥取県米子市  境港市  日吉津村  大山町  南部町  伯耆町  日南町  日野町",
+    coverage:
+      "鳥取県米子市  境港市  日吉津村  大山町  南部町  伯耆町  日南町  日野町",
   },
   {
     name: "西尾張シーエーティーヴィ(株)",
     domains: ["clovernet.ne.jp"],
     geoIds: ["230010"],
     url: "https://www.catv-jcta.jp/search/detail/10110243",
-    coverage: "愛知県津島市  稲沢市  愛西市  清須市  弥富市  あま市  大治町  蟹江町",
+    coverage:
+      "愛知県津島市  稲沢市  愛西市  清須市  弥富市  あま市  大治町  蟹江町",
   },
   {
     name: "(株)長崎ケーブルメディア",
@@ -695,7 +714,8 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["csf.ne.jp"],
     geoIds: ["400010", "400030"],
     url: "https://csf.ne.jp/service_area/",
-    coverage: "福岡県 春日市 大野城市 太宰府市 那珂川市 筑紫野市 宇美町 志免町 須恵町 粕屋町 嘉麻市",
+    coverage:
+      "福岡県 春日市 大野城市 太宰府市 那珂川市 筑紫野市 宇美町 志免町 須恵町 粕屋町 嘉麻市",
   },
   {
     name: "ＣＴＢメディア(株)",
@@ -869,7 +889,8 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["kcn.ne.jp"],
     geoIds: ["290010", "290020"],
     url: "https://www.catv-jcta.jp/search/detail/10110355",
-    coverage: "奈良県 奈良市  大和高田市  大和郡山市  天理市  橿原市  桜井市  五條市  御所市  生駒市  香芝市  葛城市  宇陀市  山添村  平群町  三郷町  斑鳩町  安堵町  川西町  三宅町  田原本町  曽爾村  御杖村  高取町  明日香村  上牧町  王寺町  広陵町  河合町  吉野町  大淀町  下市町  黒滝村  天川村",
+    coverage:
+      "奈良県 奈良市  大和高田市  大和郡山市  天理市  橿原市  桜井市  五條市  御所市  生駒市  香芝市  葛城市  宇陀市  山添村  平群町  三郷町  斑鳩町  安堵町  川西町  三宅町  田原本町  曽爾村  御杖村  高取町  明日香村  上牧町  王寺町  広陵町  河合町  吉野町  大淀町  下市町  黒滝村  天川村",
   },
   {
     name: "神河町ケーブルテレビネットワーク",
@@ -993,14 +1014,16 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["nirai.ne.jp"],
     geoIds: ["471010"],
     url: "https://www.catv-jcta.jp/search/detail/10110509",
-    coverage: "沖縄県 那覇市  宜野湾市  浦添市  沖縄市  豊見城市  北谷町  北中城村  西原町  南風原町",
+    coverage:
+      "沖縄県 那覇市  宜野湾市  浦添市  沖縄市  豊見城市  北谷町  北中城村  西原町  南風原町",
   },
   {
     name: "(株)日本ネットワークサービス",
     domains: ["nns.ne.jp"],
     geoIds: ["190010"],
     url: "https://www.catv-jcta.jp/search/detail/10110157",
-    coverage: "山梨県 甲府市  韮崎市  南アルプス市  北杜市  甲斐市  笛吹市  中央市  市川三郷町  身延町  昭和町",
+    coverage:
+      "山梨県 甲府市  韮崎市  南アルプス市  北杜市  甲斐市  笛吹市  中央市  市川三郷町  身延町  昭和町",
   },
   {
     name: "おおむらケーブルテレビ(株)",
@@ -1014,7 +1037,8 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["ogaki-tv.ne.jp"],
     geoIds: ["210010"],
     url: "https://www.catv-jcta.jp/search/detail/10110201",
-    coverage: "岐阜県 大垣市  海津市  垂井町  関ケ原町  神戸町  揖斐川町  池田町",
+    coverage:
+      "岐阜県 大垣市  海津市  垂井町  関ケ原町  神戸町  揖斐川町  池田町",
   },
   {
     name: "奥出雲町CATV",
@@ -1083,7 +1107,8 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["starcat.ne.jp"],
     geoIds: ["230010"],
     url: "https://www.catv-jcta.jp/search/detail/10110236",
-    coverage: "愛知県 名古屋市千種区  名古屋市東区  名古屋市北区  名古屋市西区  名古屋市中村区  名古屋市中区  名古屋市昭和区  名古屋市瑞穂区  名古屋市熱田区  名古屋市中川区  名古屋市港区  名古屋市南区  名古屋市名東区  名古屋市天白区  江南市  岩倉市  清須市  北名古屋市  豊山町",
+    coverage:
+      "愛知県 名古屋市千種区  名古屋市東区  名古屋市北区  名古屋市西区  名古屋市中村区  名古屋市中区  名古屋市昭和区  名古屋市瑞穂区  名古屋市熱田区  名古屋市中川区  名古屋市港区  名古屋市南区  名古屋市名東区  名古屋市天白区  江南市  岩倉市  清須市  北名古屋市  豊山町",
   },
   {
     name: "知多半島ケーブルネットワーク(株)",
@@ -1174,7 +1199,8 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["wainet.ne.jp"],
     geoIds: ["450020", "450040"],
     url: "https://www.catv-jcta.jp/search/detail/10110495",
-    coverage: "宮崎県 延岡市  日向市  川南町  都農町  門川町  美郷町  高千穂町  日之影町",
+    coverage:
+      "宮崎県 延岡市  日向市  川南町  都農町  門川町  美郷町  高千穂町  日之影町",
   },
   {
     name: "蕨ケーブルビジョン(株)",
@@ -1207,8 +1233,17 @@ export const ProviderInfoList: ProviderInfo[] = [
   {
     name: "ZTV",
     domains: ["ztv.ne.jp"],
-    geoIds: ["240010", "240020", "250020", "250010", "300020", "300010", "260010"],
-    coverage: "三重県 津市 松阪市 亀山市 尾鷲市 北牟婁郡紀北町 熊野市 南牟婁郡御浜町 紀宝町 伊勢市 鳥羽市 志摩市 度会郡玉城町 度会町 南伊勢町、滋賀県 彦根市 長浜市 米原市 高島市 大津市 草津市 守山市 栗東市 野洲市 湖南市 近江八幡市 蒲生郡竜王町、和歌山県 新宮市 田辺市 東牟婁郡串本町 那智勝浦町 太地町 古座川町 北山村 日高郡日高町 由良町 日高川町 有田郡広川町、京都府 京都市西京区 亀岡市 船井郡京丹波町",
+    geoIds: [
+      "240010",
+      "240020",
+      "250020",
+      "250010",
+      "300020",
+      "300010",
+      "260010",
+    ],
+    coverage:
+      "三重県 津市 松阪市 亀山市 尾鷲市 北牟婁郡紀北町 熊野市 南牟婁郡御浜町 紀宝町 伊勢市 鳥羽市 志摩市 度会郡玉城町 度会町 南伊勢町、滋賀県 彦根市 長浜市 米原市 高島市 大津市 草津市 守山市 栗東市 野洲市 湖南市 近江八幡市 蒲生郡竜王町、和歌山県 新宮市 田辺市 東牟婁郡串本町 那智勝浦町 太地町 古座川町 北山村 日高郡日高町 由良町 日高川町 有田郡広川町、京都府 京都市西京区 亀岡市 船井郡京丹波町",
   },
   {
     name: "(株)サイバーリンクス",
@@ -1272,7 +1307,8 @@ export const ProviderInfoList: ProviderInfo[] = [
     name: "慶應義塾大学",
     domains: ["keio.ac.jp"],
     geoIds: ["130010", "140010", "110010", "270000", "060030"],
-    coverage: "東京都,神奈川県横浜市,神奈川県藤沢市,埼玉県さいたま市,神奈川県川崎市,山形県鶴岡市,大阪市",
+    coverage:
+      "東京都,神奈川県横浜市,神奈川県藤沢市,埼玉県さいたま市,神奈川県川崎市,山形県鶴岡市,大阪市",
   },
   {
     name: "京都精華大学",
@@ -1446,7 +1482,8 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["jet.ne.jp"],
     geoIds: ["040020", "040010"],
     url: "https://www.jet.ne.jp/jet-hikari/",
-    coverage: "宮城県仙南(白石市、角田市、蔵王町、七ヶ宿町、大河原町、村田町、柴田町、川崎町、丸森町)",
+    coverage:
+      "宮城県仙南(白石市、角田市、蔵王町、七ヶ宿町、大河原町、村田町、柴田町、川崎町、丸森町)",
   },
   {
     name: "ジェイコム鎌倉",
@@ -1473,7 +1510,8 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["lcv.ne.jp"],
     geoIds: ["200020", "200030"],
     url: "https://www.catv-jcta.jp/search/detail/10112058",
-    coverage: "長野県岡谷市  諏訪市  茅野市  塩尻市  下諏訪町  富士見町  原村  辰野町",
+    coverage:
+      "長野県岡谷市  諏訪市  茅野市  塩尻市  下諏訪町  富士見町  原村  辰野町",
   },
   {
     name: "(株)御前崎ケーブルテレビ",
@@ -1573,7 +1611,8 @@ export const ProviderInfoList: ProviderInfo[] = [
     domains: ["tvs12.jp"],
     geoIds: ["400010", "420020"],
     url: "https://www.catv-jcta.jp/search/detail/10110471",
-    coverage: "福岡県筑紫野市  春日市  大野城市  太宰府市  那珂川市  宇美町  志免町  須恵町  粕屋町、長崎県佐世保市  佐々町",
+    coverage:
+      "福岡県筑紫野市  春日市  大野城市  太宰府市  那珂川市  宇美町  志免町  須恵町  粕屋町、長崎県佐世保市  佐々町",
   },
   {
     name: "雲南市・飯南町事務組合",
@@ -1585,15 +1624,17 @@ export const ProviderInfoList: ProviderInfo[] = [
 ];
 
 // ドメインからプロバイダー情報を検索するマップ
-export const ProviderInfoByDomain: Record<string, ProviderInfo> = Object.fromEntries(
-  ProviderInfoList.flatMap(info =>
-    info.domains.map(domain => [domain, info])
-  )
-);
+export const ProviderInfoByDomain: Record<string, ProviderInfo> =
+  Object.fromEntries(
+    ProviderInfoList.flatMap((info) =>
+      info.domains.map((domain) => [domain, info]),
+    ),
+  );
 
 // 後方互換性のため、既存のProviderMapも提供
-export const ProviderMap: Record<string, GeoPosSuggestion[] | undefined> = Object.fromEntries(
-  ProviderInfoList.flatMap(info =>
-    info.domains.map(domain => [domain, info.geoIds])
-  )
-) as Record<string, GeoPosSuggestion[] | undefined>;
+export const ProviderMap: Record<string, GeoPosSuggestion[] | undefined> =
+  Object.fromEntries(
+    ProviderInfoList.flatMap((info) =>
+      info.domains.map((domain) => [domain, info.geoIds]),
+    ),
+  ) as Record<string, GeoPosSuggestion[] | undefined>;

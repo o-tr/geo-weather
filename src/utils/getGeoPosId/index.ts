@@ -2,6 +2,7 @@ import type { Context } from "hono";
 import { geoPosIds } from "@/const/geo-pos-list";
 import { defaultGeoPos } from "./default-geo-pos";
 import { getGeoPrefIdHostname } from "./hostname";
+import type { ProviderInfo } from "./hostname/types";
 import { getGeoPosIdIPInfo } from "./ipinfo";
 import { geoGeoPosIdCached } from "./user";
 
@@ -34,6 +35,7 @@ export const getGeoPosId = async (
   geoId: string;
   hostname: string | undefined;
   suggestions: string[] | undefined;
+  providerInfo: ProviderInfo | undefined;
 }> => {
   const queryId = c.req.queries("geoPosId")?.[0];
   if (queryId && geoPosIds.includes(queryId)) {
@@ -50,6 +52,7 @@ export const getGeoPosId = async (
       geoId: queryId,
       hostname: undefined,
       suggestions: undefined,
+      providerInfo: undefined,
     };
   }
 
@@ -68,13 +71,13 @@ export const getGeoPosId = async (
       geoId: geoId,
       hostname: undefined,
       suggestions: undefined,
+      providerInfo: undefined,
     };
   } catch {}
 
-  const [{ suggestions, hostname }, geoPosId] = await Promise.all([
-    getGeoPrefIdHostname(ip),
-    getGeoPosIdIPInfo(ip).catch(() => undefined),
-  ]);
+  const [{ suggestions, hostname, providerInfo }, geoPosId] = await Promise.all(
+    [getGeoPrefIdHostname(ip), getGeoPosIdIPInfo(ip).catch(() => undefined)],
+  );
 
   if (suggestions?.length === 1 && suggestions[0].length === 6) {
     log({
@@ -90,6 +93,7 @@ export const getGeoPosId = async (
       geoId: suggestions[0],
       hostname,
       suggestions,
+      providerInfo,
     };
   }
 
@@ -110,6 +114,7 @@ export const getGeoPosId = async (
       geoId: geoPosId,
       hostname,
       suggestions,
+      providerInfo,
     };
   }
 
@@ -128,6 +133,7 @@ export const getGeoPosId = async (
         geoId: suggestions[0],
         hostname,
         suggestions,
+        providerInfo,
       };
     }
     return {
@@ -135,6 +141,7 @@ export const getGeoPosId = async (
       geoId: defaultGeoPos[suggestions[0]],
       hostname,
       suggestions,
+      providerInfo,
     };
   }
 
@@ -151,5 +158,6 @@ export const getGeoPosId = async (
     geoId: "130010",
     hostname,
     suggestions,
+    providerInfo,
   };
 };
