@@ -2,8 +2,30 @@ import type { Context } from "hono";
 import { geoPosIds } from "@/const/geo-pos-list";
 import { defaultGeoPos } from "./default-geo-pos";
 import { getGeoPrefIdHostname } from "./hostname";
+import type { ProviderInfo } from "./hostname/types";
 import { getGeoPosIdIPInfo } from "./ipinfo";
 import { geoGeoPosIdCached } from "./user";
+
+const log = (data: {
+  ip: string;
+  suggestions: string[] | undefined;
+  geoId: string;
+  source: string;
+  hostname: string | undefined;
+  phase: string;
+}) => {
+  console.log(
+    JSON.stringify({
+      date: Date.now(),
+      ip: data.ip,
+      suggestions: data.suggestions,
+      geoId: data.geoId,
+      source: data.source,
+      hostname: data.hostname,
+      phase: data.phase,
+    }),
+  );
+};
 
 export const getGeoPosId = async (
   ip: string,
@@ -11,111 +33,131 @@ export const getGeoPosId = async (
 ): Promise<{
   source: string;
   geoId: string;
+  hostname: string | undefined;
+  suggestions: string[] | undefined;
+  providerInfo: ProviderInfo | undefined;
 }> => {
   const queryId = c.req.queries("geoPosId")?.[0];
   if (queryId && geoPosIds.includes(queryId)) {
-    console.log(
-      JSON.stringify({
-        date: Date.now(),
-        ip,
-        prefId: "none",
-        geoPosId: queryId,
-        source: "query",
-      }),
-    );
+    log({
+      ip,
+      suggestions: undefined,
+      geoId: queryId,
+      hostname: undefined,
+      source: "query",
+      phase: "query",
+    });
     return {
       source: "query",
       geoId: queryId,
+      hostname: undefined,
+      suggestions: undefined,
+      providerInfo: undefined,
     };
   }
 
   try {
     const { geoId, source } = await geoGeoPosIdCached(ip);
-    console.log(
-      JSON.stringify({
-        date: Date.now(),
-        ip,
-        prefId: "none",
-        geoId,
-        source: source,
-      }),
-    );
+    log({
+      ip,
+      suggestions: undefined,
+      geoId,
+      hostname: undefined,
+      source,
+      phase: "user",
+    });
     return {
       source: source,
       geoId: geoId,
+      hostname: undefined,
+      suggestions: undefined,
+      providerInfo: undefined,
     };
   } catch {}
 
-  const [prefId, geoPosId] = await Promise.all([
-    getGeoPrefIdHostname(ip),
-    getGeoPosIdIPInfo(ip).catch(() => undefined),
-  ]);
+  const [{ suggestions, hostname, providerInfo }, geoPosId] = await Promise.all(
+    [getGeoPrefIdHostname(ip), getGeoPosIdIPInfo(ip).catch(() => undefined)],
+  );
 
-  if (prefId?.length === 1 && prefId[0].length === 6) {
-    console.log(
-      JSON.stringify({
-        date: Date.now(),
-        ip,
-        prefId,
-        geoPosId: prefId[0],
-        source: "hostname",
-      }),
-    );
+  if (suggestions?.length === 1 && suggestions[0].length === 6) {
+    log({
+      ip,
+      suggestions,
+      geoId: suggestions[0],
+      hostname,
+      source: "hostname",
+      phase: "suggestions with 1 length",
+    });
     return {
       source: "hostname",
-      geoId: prefId[0],
+      geoId: suggestions[0],
+      hostname,
+      suggestions,
+      providerInfo,
     };
   }
 
-  if ((!prefId || prefId.some((v) => geoPosId?.startsWith(v))) && geoPosId) {
-    console.log(
-      JSON.stringify({
-        date: Date.now(),
-        ip,
-        prefId: prefId ?? "none",
-        geoPosId,
-        source: "ipinfo",
-      }),
-    );
+  if (
+    (!suggestions || suggestions.some((v) => geoPosId?.startsWith(v))) &&
+    geoPosId
+  ) {
+    log({
+      ip,
+      suggestions,
+      geoId: geoPosId,
+      hostname,
+      source: "ipinfo",
+      phase: "ipinfo with suggestions",
+    });
     return {
       source: "ipinfo",
       geoId: geoPosId,
+      hostname,
+      suggestions,
+      providerInfo,
     };
   }
 
-  if (prefId?.[0]) {
-    console.log(
-      JSON.stringify({
-        date: Date.now(),
-        ip,
-        prefId,
-        geoPosId: defaultGeoPos[prefId[0]],
-        source: "hostname",
-      }),
-    );
-    if (prefId[0].length === 6) {
+  if (suggestions?.[0]) {
+    log({
+      ip,
+      suggestions,
+      geoId: defaultGeoPos[suggestions[0]],
+      hostname,
+      source: "hostname",
+      phase: "fallback to first suggestion",
+    });
+    if (suggestions[0].length === 6) {
       return {
         source: "hostname",
-        geoId: prefId[0],
+        geoId: suggestions[0],
+        hostname,
+        suggestions,
+        providerInfo,
       };
     }
     return {
       source: "hostname",
-      geoId: defaultGeoPos[prefId[0]],
+      geoId: defaultGeoPos[suggestions[0]],
+      hostname,
+      suggestions,
+      providerInfo,
     };
   }
 
-  console.log(
-    JSON.stringify({
-      date: Date.now(),
-      ip,
-      prefId: "none",
-      geoPosId: "130010",
-      source: "fallback",
-    }),
-  );
+  log({
+    ip,
+    suggestions,
+    geoId: "130010",
+    hostname: undefined,
+    source: "fallback",
+    phase: "fallback to default geoId",
+  });
   return {
     source: "fallback",
     geoId: "130010",
+    hostname,
+    suggestions,
+    providerInfo,
   };
 };
