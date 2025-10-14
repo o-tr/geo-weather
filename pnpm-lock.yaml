@@ -15,8 +15,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0(hono@4.9.12)(zod@3.25.76)
       '@prisma/client':
-        specifier: 6.3.0
-        version: 6.3.0(prisma@6.17.1)
+        specifier: ^6.17.1
+        version: 6.17.1(prisma@6.17.1)
       hono:
         specifier: ^4.9.12
         version: 4.9.12
@@ -267,8 +267,8 @@ packages:
     resolution: {integrity: sha512-AaX53PfPMVAaxdvuthRJePLD46eGYoaGQMEW5A0/xuAjigTQncN4WOhrXlOvg8aG8zfQQVUmhKFDHB/+UCUVoQ==}
     engines: {node: '>=12.0'}
 
-  '@prisma/client@6.3.0':
-    resolution: {integrity: sha512-BY3Fi28PUSk447Bpv22LhZp4HgNPo7NsEN+EteM1CLDnLjig5863jpW+3c3HHLFmml+nB/eJv1CjSriFZ8z7Cg==}
+  '@prisma/client@6.17.1':
+    resolution: {integrity: sha512-zL58jbLzYamjnNnmNA51IOZdbk5ci03KviXCuB0Tydc9btH2kDWsi1pQm2VecviRTM7jGia0OPPkgpGnT3nKvw==}
     engines: {node: '>=18.18'}
     peerDependencies:
       prisma: '*'
@@ -570,7 +570,7 @@ snapshots:
     dependencies:
       flatbuffers: 25.9.23
 
-  '@prisma/client@6.3.0(prisma@6.17.1)':
+  '@prisma/client@6.17.1(prisma@6.17.1)':
     optionalDependencies:
       prisma: 6.17.1
 
