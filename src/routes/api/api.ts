@@ -47,8 +47,15 @@ export const registerApiIndex = (app: Hono) => {
           accessInfo: {
             ip: ip,
             hostname: hostname || "unknown",
-            suggestions: suggestions,
-            providerInfo: providerInfo,
+            suggestions: suggestions ?? [],
+            providerInfo: providerInfo ?? {
+              name: "unknown",
+              domains: [],
+              geoIds: [],
+              url: "",
+              description: "unknown",
+              coverage: "unknown",
+            },
           },
         },
         status: "success",
