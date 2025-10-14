@@ -5,7 +5,7 @@ FROM --platform=linux/amd64 node:$NODE_VERSION AS builder
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
-RUN npm install -g pnpm
+RUN npm install -g pnpm@9
 RUN pnpm install --frozen-lockfile
 
 # Prepare node_modules

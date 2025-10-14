@@ -1,32 +1,37 @@
-import { GeoPosSuggestion } from "@/const/geo-pos-list";
+import type { GeoPosSuggestion } from "@/const/geo-pos-list";
+import { 東日本, 西日本 } from "./pos-geoId-map";
 
 export const hostnamePrefMapGenerator = (
   regex: RegExp | RegExp[],
   map: {
-    [key: string]: GeoPosSuggestion;
-  }
+    [key: string]: GeoPosSuggestion | GeoPosSuggestion[];
+  },
+  fallback?: GeoPosSuggestion[],
 ): ((key: string) => GeoPosSuggestion[] | undefined) => {
   return (key: string) => {
     const prefId = (() => {
       if (Array.isArray(regex)) {
         for (const r of regex) {
           const match = key.match(r);
-          if (match && match[1]) {
+          if (match?.[1]) {
             return match[1];
           }
         }
         return undefined;
       }
       const match = key.match(regex);
-      if (match && match[1]) {
+      if (match?.[1]) {
         return match[1];
       }
       return undefined;
     })();
     if (prefId && map[prefId]) {
+      if (Array.isArray(map[prefId])) {
+        return map[prefId] as GeoPosSuggestion[];
+      }
       return [map[prefId]];
     }
-    return undefined;
+    return fallback;
   };
 };
 
@@ -80,66 +85,69 @@ export const parseOcnHostname = hostnamePrefMapGenerator(
     miyazaki: "45",
     kagoshima: "46",
     okinawa: "47",
-  }
+  },
 );
 
-export const parseInfowebHostname = hostnamePrefMapGenerator(
-  /\.([a-z]+)\.[a-z]+\.[a-z]+\.ppp\.infoweb\.ne\.jp$/,
-  {
-    hkid: "01",
-    spro: "01",
-    aomr: "02",
-    iwte: "03",
-    mygi: "04",
-    sndi: "04",
-    akta: "05",
-    ymgt: "06",
-    fksm: "07",
-    ibrk: "08",
-    tcgi: "09",
-    gnma: "10",
-    sitm: "11",
-    chba: "12",
-    tkyo: "13",
-    kngw: "14",
-    atgi: "14",
-    nigt: "15",
-    tyma: "16",
-    iskw: "17",
-    fuki: "18",
-    ymns: "19",
-    ngno: "20",
-    gifu: "21",
-    szok: "22",
-    yizu: "22",
-    aich: "23",
-    ngya: "23",
-    miex: "24",
-    shga: "25",
-    kyto: "26",
-    oska: "27",
-    hygo: "28",
-    nara: "29",
-    wkym: "30",
-    ttri: "31",
-    smne: "32",
-    okym: "33",
-    hrsm: "34",
-    ymgc: "35",
-    tksm: "36",
-    kgwa: "37",
-    ehme: "38",
-    kuch: "39",
-    fkok: "40",
-    saga: "41",
-    ngsk: "42",
-    kmmt: "43",
-    oita: "44",
-    myzk: "45",
-    kgsm: "46",
-    oknw: "47",
-  }
-);
+/**
+ * infoweb系,使われていないのと割り当て法則が変わっていそうなので削除
+ */
+// export const parseInfowebHostname = hostnamePrefMapGenerator(
+// 	/\.([a-z]+)\.[a-z]+\.[a-z]+\.ppp\.infoweb\.ne\.jp$/,
+// 	{
+// 		hkid: "01",
+// 		spro: "01",
+// 		aomr: "02",
+// 		iwte: "03",
+// 		mygi: "04",
+// 		sndi: "04",
+// 		akta: "05",
+// 		ymgt: "06",
+// 		fksm: "07",
+// 		ibrk: "08",
+// 		tcgi: "09",
+// 		gnma: "10",
+// 		sitm: "11",
+// 		chba: "12",
+// 		tkyo: "13",
+// 		kngw: "14",
+// 		atgi: "14",
+// 		nigt: "15",
+// 		tyma: "16",
+// 		iskw: "17",
+// 		fuki: "18",
+// 		ymns: "19",
+// 		ngno: "20",
+// 		gifu: "21",
+// 		szok: "22",
+// 		yizu: "22",
+// 		aich: "23",
+// 		ngya: "23",
+// 		miex: "24",
+// 		shga: "25",
+// 		kyto: "26",
+// 		oska: "27",
+// 		hygo: "28",
+// 		nara: "29",
+// 		wkym: "30",
+// 		ttri: "31",
+// 		smne: "32",
+// 		okym: "33",
+// 		hrsm: "34",
+// 		ymgc: "35",
+// 		tksm: "36",
+// 		kgwa: "37",
+// 		ehme: "38",
+// 		kuch: "39",
+// 		fkok: "40",
+// 		saga: "41",
+// 		ngsk: "42",
+// 		kmmt: "43",
+// 		oita: "44",
+// 		myzk: "45",
+// 		kgsm: "46",
+// 		oknw: "47",
+// 	},
+// );
 
 export const parseMeshHostname = hostnamePrefMapGenerator(
   /\.([a-z0-9]+)\.mesh\.ad\.jp$/,
@@ -198,7 +206,7 @@ export const parseMeshHostname = hostnamePrefMapGenerator(
     myz: "45",
     kgs: "46",
     okn: "47",
-  }
+  },
 );
 
 export const parseEoNetHostname = hostnamePrefMapGenerator(
@@ -210,116 +218,123 @@ export const parseEoNetHostname = hostnamePrefMapGenerator(
     shg: "25",
     nar: "29",
     wky: "30",
-  }
+    kns: ["25", "26", "27", "28", "29", "30"],
+  },
 );
 
-export const parseHiHoHostname = hostnamePrefMapGenerator(
-  /^([a-z]+)[0-9]+-p[0-9]+\.hi-ho\.ne\.jp$/,
-  {
-    hkd: "01",
-    amr: "02",
-    iwt: "03",
-    myg: "04",
-    akt: "05",
-    ymt: "06",
-    fks: "07",
-    ibr: "08",
-    tcg: "09",
-    gmm: "10",
-    stm: "11",
-    chb: "12",
-    tky: "13",
-    kng: "14",
-    ngt: "15",
-    tym: "16",
-    isk: "17",
-    fki: "18",
-    ymn: "19",
-    ngn: "20",
-    gif: "21",
-    szk: "22",
-    aic: "23",
-    mie: "24",
-    shg: "25",
-    kyt: "26",
-    osk: "27",
-    hyg: "28",
-    nar: "29",
-    wky: "30",
-    ttr: "31",
-    smn: "32",
-    oky: "33",
-    hrs: "34",
-    ymc: "35",
-    tks: "36",
-    kgw: "37",
-    ehm: "38",
-    kch: "39",
-    fkk: "40",
-    sag: "41",
-    ngs: "42",
-    kmm: "43",
-    oit: "44",
-    myz: "45",
-    kgs: "46",
-    okn: "47",
-  }
-);
+/**
+ * hi-ho系,割り当て法則が変わっていそうなので削除
+ */
+// export const parseHiHoHostname = hostnamePrefMapGenerator(
+// 	/^([a-z]+)[0-9]+-p[0-9]+\.hi-ho\.ne\.jp$/,
+// 	{
+// 		hkd: "01",
+// 		amr: "02",
+// 		iwt: "03",
+// 		myg: "04",
+// 		akt: "05",
+// 		ymt: "06",
+// 		fks: "07",
+// 		ibr: "08",
+// 		tcg: "09",
+// 		gmm: "10",
+// 		stm: "11",
+// 		chb: "12",
+// 		tky: "13",
+// 		kng: "14",
+// 		ngt: "15",
+// 		tym: "16",
+// 		isk: "17",
+// 		fki: "18",
+// 		ymn: "19",
+// 		ngn: "20",
+// 		gif: "21",
+// 		szk: "22",
+// 		aic: "23",
+// 		mie: "24",
+// 		shg: "25",
+// 		kyt: "26",
+// 		osk: "27",
+// 		hyg: "28",
+// 		nar: "29",
+// 		wky: "30",
+// 		ttr: "31",
+// 		smn: "32",
+// 		oky: "33",
+// 		hrs: "34",
+// 		ymc: "35",
+// 		tks: "36",
+// 		kgw: "37",
+// 		ehm: "38",
+// 		kch: "39",
+// 		fkk: "40",
+// 		sag: "41",
+// 		ngs: "42",
+// 		kmm: "43",
+// 		oit: "44",
+// 		myz: "45",
+// 		kgs: "46",
+// 		okn: "47",
+// 	},
+// );
 
-export const parseOdnHostname = hostnamePrefMapGenerator(
-  /^([a-z]{3}).*\.ppp[0-9]+\.odn\.(?:ad|ne)\.jp/,
-  {
-    sod: "01",
-    oki: "02",
-    mrn: "03",
-    aob: "04",
-    nkd: "05",
-    imz: "06",
-    hnz: "07",
-    aka: "08",
-    hrd: "09",
-    kkr: "10",
-    skn: "11",
-    fna: "12",
-    ofs: "13",
-    hdo: "14",
-    ngn: "15",
-    tyn: "16",
-    knn: "17",
-    fkn: "18",
-    kfn: "19",
-    syd: "20",
-    sdd: "22",
-    ssj: "23",
-    ykm: "24",
-    otu: "25",
-    kyn: "26",
-    nwt: "27",
-    kbm: "28",
-    daj: "29",
-    wkn: "30",
-    ttn: "31",
-    smn: "32",
-    imm: "33",
-    nih: "34",
-    ygn: "35",
-    tkn: "36",
-    tmn: "37",
-    myn: "38",
-    kcm: "39",
-    fkc: "40",
-    tgs: "41",
-    sco: "42",
-    oby: "43",
-    omc: "44",
-    mzn: "45",
-    kmi: "46",
-    yrm: "47",
-  }
-);
+/**
+ * odn系,割り当て法則が変わっていそうなので削除
+ */
+// export const parseOdnHostname = hostnamePrefMapGenerator(
+// 	/^([a-z]{3}).*\.ppp[0-9]+\.odn\.(?:ad|ne)\.jp/,
+// 	{
+// 		sod: "01",
+// 		oki: "02",
+// 		mrn: "03",
+// 		aob: "04",
+// 		nkd: "05",
+// 		imz: "06",
+// 		hnz: "07",
+// 		aka: "08",
+// 		hrd: "09",
+// 		kkr: "10",
+// 		skn: "11",
+// 		fna: "12",
+// 		ofs: "13",
+// 		hdo: "14",
+// 		ngn: "15",
+// 		tyn: "16",
+// 		knn: "17",
+// 		fkn: "18",
+// 		kfn: "19",
+// 		syd: "20",
+// 		sdd: "22",
+// 		ssj: "23",
+// 		ykm: "24",
+// 		otu: "25",
+// 		kyn: "26",
+// 		nwt: "27",
+// 		kbm: "28",
+// 		daj: "29",
+// 		wkn: "30",
+// 		ttn: "31",
+// 		smn: "32",
+// 		imm: "33",
+// 		nih: "34",
+// 		ygn: "35",
+// 		tkn: "36",
+// 		tmn: "37",
+// 		myn: "38",
+// 		kcm: "39",
+// 		fkc: "40",
+// 		tgs: "41",
+// 		sco: "42",
+// 		oby: "43",
+// 		omc: "44",
+// 		mzn: "45",
+// 		kmi: "46",
+// 		yrm: "47",
+// 	},
+// );
 
 export const parseSoNetHostname = hostnamePrefMapGenerator(
-  /\.([a-z\-]{4})[a-z0-9]+\.ap\.so-net\.ne\.jp$/,
+  /\.([a-z-]{4})[a-z0-9]+\.ap\.so-net\.ne\.jp$/,
   {
     hkid: "01",
     sppr: "01",
@@ -376,7 +391,7 @@ export const parseSoNetHostname = hostnamePrefMapGenerator(
     myzk: "45",
     kgsm: "46",
     oknw: "47",
-  }
+  },
 );
 
 export const parseCommufaHostname = hostnamePrefMapGenerator(
@@ -388,7 +403,7 @@ export const parseCommufaHostname = hostnamePrefMapGenerator(
     gifu1: "21",
     mie1: "24",
     shizuoka1: "22",
-  }
+  },
 );
 
 export const parseNuroHostname = hostnamePrefMapGenerator(
@@ -421,7 +436,7 @@ export const parseNuroHostname = hostnamePrefMapGenerator(
     hrsn: "34",
     fkol: "40",
     sagl: "41",
-  }
+  },
 );
 
 export const parseVectantHostname = hostnamePrefMapGenerator(
@@ -444,7 +459,7 @@ export const parseVectantHostname = hostnamePrefMapGenerator(
     hyogo: "28",
     hiroshima: "34",
     fukuoka: "40",
-  }
+  },
 );
 
 export const parseGmoIspHostname = hostnamePrefMapGenerator(
@@ -462,14 +477,17 @@ export const parseGmoIspHostname = hostnamePrefMapGenerator(
     saitama: "11",
     shizuoka: "22",
     tokyo: "13",
-  }
+    hiroshima: "34",
+    east: 東日本,
+    west: 西日本,
+  },
 );
 
 export const parseAtNiftyHostname = hostnamePrefMapGenerator(
   /\.([a-z]+)\.kotei\.ppp\.nifty\.ne\.jp$/,
   {
     hkid: "01",
-  }
+  },
 );
 
 export const parseSakuraHostname = hostnamePrefMapGenerator(
@@ -478,7 +496,7 @@ export const parseSakuraHostname = hostnamePrefMapGenerator(
     ik: "016010",
     os: "270000",
     tk: "130010",
-  }
+  },
 );
 
 export const parseCoralNetHostname = hostnamePrefMapGenerator(
@@ -488,25 +506,37 @@ export const parseCoralNetHostname = hostnamePrefMapGenerator(
     oyama: "16",
     kanazawa: "17",
     anazawa: "17",
-  }
+  },
 );
 
 export const parsePlalaHostname = (hostname: string) => {
   const plala = hostname.match(/a0(\d\d)\.ap\.plala\.or\.jp$/);
-  if (plala && plala[1]) {
+  if (plala?.[1]) {
     return [plala[1] as GeoPosSuggestion];
   }
   return undefined;
 };
 
+const parseKanazawaCableHostname = hostnamePrefMapGenerator(
+  /-([a-z]+)\.kanazawacable\.jp$/,
+  {
+    knzw: ["170010"],
+    nonoichi: ["170010"],
+    shika: ["170020"],
+    tsubata: ["170010"],
+  },
+  ["17"],
+);
+
 export const HostnameParserMap = {
   "plala.or.jp": parsePlalaHostname,
   "ocn.ne.jp": parseOcnHostname,
-  "infoweb.ne.jp": parseInfowebHostname,
+  // "infoweb.ne.jp": parseInfowebHostname,
   "mesh.ad.jp": parseMeshHostname,
   "eonet.ne.jp": parseEoNetHostname,
-  "hi-ho.ne.jp": parseHiHoHostname,
-  "odn.ne.jp": parseOdnHostname,
+  // "hi-ho.ne.jp": parseHiHoHostname,
+  // "odn.ne.jp": parseOdnHostname,
+  // "odn.ad.jp": parseOdnHostname,
   "so-net.ne.jp": parseSoNetHostname,
   "commufa.jp": parseCommufaHostname,
   "nuro.jp": parseNuroHostname,
@@ -515,4 +545,5 @@ export const HostnameParserMap = {
   "nifty.ne.jp": parseAtNiftyHostname,
   "sakura.ne.jp": parseSakuraHostname,
   "coralnet.or.jp": parseCoralNetHostname,
+  "kanazawacable.jp": parseKanazawaCableHostname,
 } as Record<string, (hostname: string) => GeoPosSuggestion[] | undefined>;

@@ -1,40 +1,40 @@
-import {prisma} from "@/lib/prisma";
-import {resolveGeoId} from "./resolver";
-import {IPInfoResponse} from "@/types/ipinfo";
 import { apiToken, endpoint, sourceName } from "@/const/env";
+import { prisma } from "@/lib/prisma";
+import { IPInfoResponse } from "@/types/ipinfo";
+import { resolveGeoId } from "./resolver";
 
-export const getGeoPosIdIPInfo = async(ip: string):Promise<string> => {
+export const getGeoPosIdIPInfo = async (ip: string): Promise<string> => {
   const geoObj = await prisma.geoWeather.findFirst({
-    where:{
+    where: {
       ip,
-      source:{
-        not: "user"
-      }
-    }
+      source: {
+        not: "user",
+      },
+    },
   });
   if (geoObj) return geoObj.geoId;
   const response = await fetch(`${endpoint}/${ip}/json?token=${apiToken}`);
   const json = await response.json();
   const data = IPInfoResponse.parse(json);
   const geoId = resolveGeoId(data);
-  try{
+  try {
     await prisma.geoWeather.create({
-      data:{
+      data: {
         ip,
         geoId,
-        source: sourceName
-      }
+        source: sourceName,
+      },
     });
-  }catch (e){
+  } catch (_e) {
     await prisma.geoWeather.update({
       where: {
-        ip
+        ip,
       },
       data: {
         geoId,
-        source: sourceName
-      }
-    })
+        source: sourceName,
+      },
+    });
   }
   return geoId;
-}
+};

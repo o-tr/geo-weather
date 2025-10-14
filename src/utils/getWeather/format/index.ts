@@ -1,19 +1,28 @@
-import {ForecastItem, FormattedWeather, WeatherResponse} from "@/types/weather";
-import {geoPosName} from "@/const/geo-pos-list";
-import {getArea} from "./getArea";
-import {getFormattedDate} from "./getFormattedDate";
-import {getWeatherIconId, getWeatherLabel} from "./getWeatherLabels";
+import { geoPosName } from "@/const/geo-pos-list";
+import type {
+  ForecastItem,
+  FormattedWeather,
+  WeatherResponse,
+} from "@/types/weather";
+import { getArea } from "./getArea";
+import { getFormattedDate } from "./getFormattedDate";
+import { getWeatherIconId, getWeatherLabel } from "./getWeatherLabels";
 
-
-export const formatWeather = (forecast: WeatherResponse, geoPosId: string): FormattedWeather=> {
+export const formatWeather = (
+  forecast: WeatherResponse,
+  geoPosId: string,
+): FormattedWeather => {
   const [threeDays, oneWeek] = forecast;
 
   const [threeDaysForecast, threeDaysPop, threeDaysTemp] = threeDays.timeSeries;
 
-  const threeDaysForecastData = {} as Record<string, {
-    icon: string;
-    weather: string;
-  }>;
+  const threeDaysForecastData = {} as Record<
+    string,
+    {
+      icon: string;
+      weather: string;
+    }
+  >;
   {
     const area = getArea(threeDaysForecast.areas, geoPosId);
     for (let i = 0; i < threeDaysForecast.timeDefines.length; i++) {
@@ -22,8 +31,8 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
       const weather = getWeatherLabel(area.weatherCodes[i], "JA");
       threeDaysForecastData[dateStr] = {
         icon,
-        weather
-      }
+        weather,
+      };
     }
   }
 
@@ -31,7 +40,9 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
   {
     const area = getArea(threeDaysPop.areas, geoPosId);
     for (let i = 0; i < threeDaysPop.timeDefines.length; i++) {
-      const {str: dateStr, hour} = getFormattedDate(threeDaysPop.timeDefines[i]);
+      const { str: dateStr, hour } = getFormattedDate(
+        threeDaysPop.timeDefines[i],
+      );
       if (!threeDaysPopData[dateStr]) {
         threeDaysPopData[dateStr] = ["-", "-", "-", "-"];
       }
@@ -39,10 +50,13 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
     }
   }
 
-  const threeDaysTempData = {} as Record<string, {
-    min?: string;
-    max?: string;
-  }>;
+  const threeDaysTempData = {} as Record<
+    string,
+    {
+      min?: string;
+      max?: string;
+    }
+  >;
   {
     const area = getArea(threeDaysTemp.areas, geoPosId);
     for (let i = 0; i < threeDaysTemp.timeDefines.length; i++) {
@@ -50,7 +64,7 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
       const value = area.temps[i];
       if (!threeDaysTempData[dateStr]) {
         threeDaysTempData[dateStr] = {
-          min: value
+          min: value,
         };
       } else {
         threeDaysTempData[dateStr].max = value;
@@ -60,11 +74,14 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
 
   const [oneWeekForecast, oneWeekTemp] = oneWeek.timeSeries;
 
-  const oneWeekForecastData = {} as Record<string, {
-    icon: string;
-    weather: string;
-    pop: string;
-  }>;
+  const oneWeekForecastData = {} as Record<
+    string,
+    {
+      icon: string;
+      weather: string;
+      pop: string;
+    }
+  >;
   {
     const area = getArea(oneWeekForecast.areas, geoPosId);
     for (let i = 0; i < oneWeekForecast.timeDefines.length; i++) {
@@ -75,15 +92,18 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
       oneWeekForecastData[dateStr] = {
         icon,
         weather,
-        pop
-      }
+        pop,
+      };
     }
   }
 
-  const oneWeekTempData = {} as Record<string, {
-    min?: string;
-    max?: string;
-  }>;
+  const oneWeekTempData = {} as Record<
+    string,
+    {
+      min?: string;
+      max?: string;
+    }
+  >;
   {
     const area = getArea(oneWeekTemp.areas, geoPosId);
     for (let i = 0; i < oneWeekTemp.timeDefines.length; i++) {
@@ -92,8 +112,8 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
       const max = area.tempsMax[i];
       oneWeekTempData[dateStr] = {
         min,
-        max
-      }
+        max,
+      };
     }
   }
 
@@ -103,7 +123,7 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
       date,
       icon: forecastData.icon,
       weather: forecastData.weather,
-      ...result[date]??{}
+      ...(result[date] ?? {}),
     };
   }
 
@@ -111,7 +131,7 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
     result[date] = {
       date,
       pop: forecastData.join("/"),
-      ...result[date]??{}
+      ...(result[date] ?? {}),
     };
   }
 
@@ -120,7 +140,7 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
       date,
       tempMin: forecastData.min,
       tempMax: forecastData.max,
-      ...result[date]??{}
+      ...(result[date] ?? {}),
     };
   }
 
@@ -130,7 +150,7 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
       icon: forecastData.icon,
       weather: forecastData.weather,
       pop: forecastData.pop,
-      ...result[date]
+      ...result[date],
     };
   }
 
@@ -139,7 +159,7 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
       date,
       tempMin: forecastData.min,
       tempMax: forecastData.max,
-      ...result[date]
+      ...result[date],
     };
   }
 
@@ -162,8 +182,10 @@ export const formatWeather = (forecast: WeatherResponse, geoPosId: string): Form
   }
 
   const today = new Date();
-  today.setHours(0,0,0,0);
-  const weather =(Object.values(result) as ForecastItem[]).sort((a, b) => new Date(a.date) >= new Date(b.date) ? 1 : -1).filter((v)=>new Date(v.date) >= today);
+  today.setHours(0, 0, 0, 0);
+  const weather = (Object.values(result) as ForecastItem[])
+    .sort((a, b) => (new Date(a.date) >= new Date(b.date) ? 1 : -1))
+    .filter((v) => new Date(v.date) >= today);
 
   const todayWeather = weather[0];
   if (todayWeather?.tempMax === todayWeather.tempMin) {

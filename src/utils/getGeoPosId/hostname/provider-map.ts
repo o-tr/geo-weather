@@ -1,4 +1,5 @@
-import { GeoPosSuggestion } from "@/const/geo-pos-list";
+import type { GeoPosSuggestion } from "@/const/geo-pos-list";
+import { 東日本, 西日本 } from "./pos-geoId-map";
 
 export const ProviderMap = {
   //https://www.catv-jcta.jp/search/detail/10110281
@@ -25,6 +26,11 @@ export const ProviderMap = {
   //ピカラネットは四国地方のみ
   "pikara.ne.jp": ["36", "37", "38", "39"],
 
+  //株式会社STNet
+  //https://www.stnet.co.jp/
+  //ぴからの親っぽい
+  "stnet.ne.jp": ["36", "37", "38", "39"],
+
   //https://www.bbiq.jp/
   //BBIQは九州地方のみ
   "ppp.bbiq.jp": ["40", "41", "42", "43", "44", "45", "46"],
@@ -44,6 +50,7 @@ export const ProviderMap = {
   //https://www.catv-jcta.jp/search/detail/10110117
   //いちはらケーブルテレビは千葉県北西部のみ
   "icntv.ne.jp": ["120010"],
+  "eastcom.ne.jp": ["120010"],
 
   //https://www.itscom.co.jp/info/areamap/
   //東京・神奈川
@@ -68,6 +75,12 @@ export const ProviderMap = {
     "070010", // 福島県福島市
     "150010", // 新潟県新潟市北区,新潟市東区,新潟市中央区,新潟市西区
   ],
+  "ncv.jp": [
+    "017010", // 北海道函館市,北斗市,七飯町
+    "060020", // 山形県米沢市,南陽市,高畠町,川西町
+    "070010", // 福島県福島市
+    "150010", // 新潟県新潟市北区,新潟市東区,新潟市中央区,新潟市西区
+  ],
   "omn.ne.jp": [
     "017010", // 北海道函館市,北斗市,七飯町
     "060020", // 山形県米沢市,南陽市,高畠町,川西町
@@ -84,6 +97,7 @@ export const ProviderMap = {
   //https://www.catv-jcta.jp/search/detail/10110383
   //ちゅピＣＯＭは広島県のみ
   "fch.ne.jp": ["34"],
+  "hicat.ne.jp": ["34"],
 
   //https://www.catv-jcta.jp/search/detail/10110486
   //大分ケーブルテレコムは大分県のみ
@@ -827,6 +841,256 @@ export const ProviderMap = {
   //(株)上野原ブロードバンドコミュニケーションズ
   //山梨県 上野原市
   "ubcnet.jp": ["190020"],
+
+  //https://www.aitech.ac.jp/
+  // 愛知工業大学
+  // 愛知県名古屋市/豊田市
+  "aitech.ac.jp": ["230010", "230020"],
+
+  //dendai.ac.jp
+  //東京電機大学
+  //東京都足立区,埼玉県比企郡鳩山町,千葉県印西市
+  "dendai.ac.jp": ["130010", "110020", "120010"],
+
+  //geidai.ac.jp
+  //東京芸術大学
+  //東京都台東区,東京都足立区,茨城県取手市,神奈川県横浜市中区
+  "geidai.ac.jp": ["130010", "080020", "140010"],
+
+  //hiroshima-u.ac.jp
+  //広島大学
+  //広島県東広島市,広島市南区,広島市中区
+  "hiroshima-u.ac.jp": ["340010"],
+
+  //jaist.ac.jp
+  //北陸先端科学技術大学院大学
+  //石川県能美市,石川県金沢市,東京都港区
+  "jaist.ac.jp": ["170010", "130010"],
+
+  //kanto-gakuin.ac.jp
+  //関東学院大学
+  //神奈川県横浜市
+  "kanto-gakuin.ac.jp": ["140010"],
+
+  //keio.ac.jp
+  //慶應義塾大学
+  //東京都,神奈川県横浜市,神奈川県藤沢市,埼玉県さいたま市,神奈川県川崎市,山形県鶴岡市,大阪市
+  "keio.ac.jp": ["130010", "140010", "110010", "270000", "060030"],
+
+  //kyoto-seika.ac.jp
+  //京都精華大学
+  //京都府京都市
+  "kyoto-seika.ac.jp": ["260010"],
+
+  //nit.ac.jp
+  //日本工業大学
+  //埼玉県南埼玉郡宮代町
+  "nit.ac.jp": ["110010"],
+
+  //numazu-ct.ac.jp
+  //沼津工業高等専門学校
+  //静岡県沼津市
+  "numazu-ct.ac.jp": ["220030"],
+
+  //oit.ac.jp
+  //大阪工業大学
+  //大阪府大阪市
+  "oit.ac.jp": ["270000"],
+
+  //wakayama-u.ac.jp
+  //和歌山大学
+  //和歌山県和歌山市
+  "wakayama-u.ac.jp": ["300010"],
+
+  //yamanashi.ac.jp
+  //山梨大学
+  //山梨県甲府市,中央市
+  "yamanashi.ac.jp": ["190010"],
+
+  //ctc.ad.jp
+  //中部テレコミュニケーション
+  //愛知,岐阜,三重,静岡,長野
+  "ctc.ad.jp": ["23", "21", "24", "22", "20"],
+
+  //extride.ad.jp
+  //エクストライド
+  //熊本県人吉市
+  "extride.ad.jp": ["430040"],
+
+  //https://bb-niigata.jp
+  //BB.にいがた
+  //新潟
+  "bb-niigata.jp": ["15"],
+
+  //ix1.co.jp
+  //株式会社エックス・チェンジ
+  //新潟っぽい
+  "ix1.co.jp": ["15"],
+
+  //dsn.jp
+  //オプテージらしい
+  //一旦EO光と同じエリアにしておく
+  "dsn.jp": ["25", "26", "27", "28", "29", "30"],
+
+  //jcom系
+  //ホスト名的に関東近辺だと思われる
+  "j-cnet.jp": ["10", "11", "12", "13", "14"],
+
+  //https://kapi-q.jp/
+  //カピバラクオリティ
+  //岡山県倉敷市
+  "kapi-q.jp": ["330010"],
+
+  //https://www.catv-jcta.jp/search/detail/10110510
+  //宮古テレビ(株)
+  //沖縄県宮古島市  多良間村
+  "miyako-ma.jp": ["473000"],
+
+  //https://www.catv-jcta.jp/search/detail/10112084
+  //東白川ＣＡＴＶ（東白川村）
+  //岐阜県東白川村
+  "50913.ne.jp": ["210010"],
+
+  //http://y-hikari.yutopia.or.jp/
+  //特定非営利活動法人ゆーとぴあネット
+  "akita-uruwashi.ne.jp": ["05"],
+
+  //https://www.avis.ne.jp/
+  //https://www.avis.ne.jp/direct/con_enter_broadband.html
+  //長野市,上田市 ,大町市
+  "avis.ne.jp": ["200010", "200020"],
+
+  //オープン埼玉ネットワーク
+  "cablenet.ne.jp": ["11"],
+
+  //https://www.catv-jcta.jp/search/detail/10110293
+  //(株)ケーブルテレビ若狭小浜
+  //福井県小浜市
+  "cho.ne.jp": ["180020"],
+
+  //http://www.dokidoki.ne.jp/
+  //マジカルサイト・インターネットサービス dokidoki!
+  //愛媛周辺らしい
+  "dokidoki.ne.jp": ["38"],
+
+  //https://www.editnet.ad.jp/services/
+  //EditNet
+  //東京周辺
+  "edit.ne.jp": ["130010"],
+
+  //https://www.catv-jcta.jp/search/detail/10110158
+  //富士川シーエーティーヴィ(株)
+  //山梨県南アルプス市  市川三郷町  富士川町
+  "fb-net.ne.jp": ["190010"],
+
+  //https://www.harenet.ad.jp/company
+  //晴れの国ネット株式会社
+  //岡山周辺
+  "harenet.ne.jp": ["33"],
+
+  //https://hikari-net.ne.jp/%e3%80%8c%e3%81%bf%e3%81%be%e3%81%ad%e3%81%a3%e3%81%a8%e3%80%8d%e3%82%a4%e3%83%b3%e3%82%bf%e3%83%bc%e3%83%8d%e3%83%83%e3%83%88%e3%82%b5%e3%83%bc%e3%83%93%e3%82%b9/
+  //みまねっと/株式会社光ネット
+  //美馬市
+  "hikari-net.ne.jp": ["360010"],
+
+  //https://www.catv-jcta.jp/search/detail/10110012
+  //(株)八戸テレビ放送
+  //青森県八戸市  南部町
+  "htv-net.ne.jp": ["020030"],
+
+  //https://www.jet.ne.jp/jet-hikari/
+  //ジェットインターネット株式会社
+  //宮城県仙南(白石市、角田市、蔵王町、七ヶ宿町、大河原町、村田町、柴田町、川崎町、丸森町)
+  "jet.ne.jp": ["040020", "040010"],
+
+  //https://ja.wikipedia.org/wiki/%E3%82%B8%E3%82%A7%E3%82%A4%E3%82%B3%E3%83%A0%E9%8E%8C%E5%80%89
+  //神奈川県鎌倉市、逗子市
+  "kamakuranet.ne.jp": ["140010"],
+
+  //https://www.catv-jcta.jp/search/detail/10110153
+  //峡東ケーブルネット(株)
+  //山梨県山梨市  甲州市
+  "kcnet.ne.jp": ["190010"],
+
+  //https://www.keihanna-plaza.co.jp/
+  //けいはんなプラザ独自ネットワーク?
+  "keihanna.ne.jp": ["260010"],
+
+  //https://www.catv-jcta.jp/search/detail/10112058
+  //エルシーブイ(株)
+  //長野県岡谷市  諏訪市  茅野市  塩尻市  下諏訪町  富士見町  原村  辰野町
+  "lcv.ne.jp": ["200020", "200030"],
+
+  //https://www.catv-jcta.jp/search/detail/10110222
+  //(株)御前崎ケーブルテレビ
+  //静岡県御前崎市
+  "maotv.ne.jp": ["220040"],
+
+  //https://www.mto.ne.jp/
+  //鏡野町有線テレビ
+  //岡山県鏡野町
+  "mto.ne.jp": ["330020"],
+
+  //https://www.nsk.ad.jp/
+  //株式会社ネスク
+  //富山、石川
+  "nsk.ne.jp": ["16", "17"],
+
+  //https://www.catv-jcta.jp/search/detail/10112101
+  //白根ケーブルネットワーク(株)
+  //山梨県南アルプス市
+  "nus.ne.jp": ["190010"],
+
+  //https://corp.synapse.jp/
+  //株式会社シナプス
+  "synapse.ne.jp": ["46"],
+
+  //https://tam.ne.jp/
+  //NTT西のみ
+  "tam.ne.jp": 西日本,
+
+  //https://ja.wikipedia.org/wiki/%E3%82%B8%E3%82%A7%E3%82%A4%E3%82%B3%E3%83%A0%E5%8D%97%E6%A8%AA%E6%B5%9C
+  //ttmy.ne.jp
+  //神奈川県横浜市金沢区、港南区、栄区、戸塚区
+  "ttmy.ne.jp": ["140010"],
+
+  //https://www.cbbs.jp/
+  //CBBS株式会社
+  "yamasemi.ne.jp": ["340020"],
+
+  //https://www.catv-jcta.jp/search/detail/10110277
+  //(株)新川インフォメーションセンター
+  //富山県魚津市
+  "nice-tv.jp": ["160010"],
+
+  //https://www.global-netcore.jp/
+  //新潟近辺っぽい
+  "nplus-net.jp": ["15"],
+
+  //https://www.janis.jp/
+  //長野
+  "janis.or.jp": ["20"],
+
+  //https://www.mitene.co.jp/network/
+  //ミテネインターネット株式会社
+  //福井っぽい?
+  "mitene.or.jp": ["18"],
+
+  //https://www.phoenix-c.or.jp/service/phoenix-hikari/
+  //フェニックスコミュニケーションズ株式会社
+  //東日本
+  "rppp.jp": 東日本,
+
+  //https://www.catv-jcta.jp/search/detail/10110471
+  //九州テレ・コミュニケーションズ(株)
+  //福岡県筑紫野市  春日市  大野城市  太宰府市  那珂川市  宇美町  志免町  須恵町  粕屋町
+  //長崎県佐世保市  佐々町
+  "tvs12.jp": ["400010", "420020"],
+
+  //https://www.unnan-yume.net/
+  //雲南市・飯南町事務組合
+  //島根県雲南市  飯南町
+  "yoitoko.jp": ["320010"],
 } satisfies Record<string, GeoPosSuggestion[] | undefined> as Record<
   string,
   GeoPosSuggestion[] | undefined

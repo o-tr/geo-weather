@@ -1,9 +1,9 @@
-import { Hono } from "hono";
-import { getRequestIp } from "@/utils/getRequestIp";
-import { getGeoPosId } from "@/utils/getGeoPosId";
-import { getWeather } from "@/utils/getWeather";
-import { getOverview } from "@/utils/getOverview";
+import type { Hono } from "hono";
 import { prisma } from "@/lib/prisma";
+import { getGeoPosId } from "@/utils/getGeoPosId";
+import { getOverview } from "@/utils/getOverview";
+import { getRequestIp } from "@/utils/getRequestIp";
+import { getWeather } from "@/utils/getWeather";
 
 export const registerApiIndex = (app: Hono) => {
   app.get("/api", async (c) => {
