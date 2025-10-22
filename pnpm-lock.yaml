@@ -10,16 +10,16 @@ importers:
     dependencies:
       '@hono/node-server':
         specifier: ^1.19.5
-        version: 1.19.5(hono@4.9.12)
+        version: 1.19.5(hono@4.10.2)
       '@hono/zod-validator':
         specifier: ^0.3.0
-        version: 0.3.0(hono@4.9.12)(zod@3.25.76)
+        version: 0.3.0(hono@4.10.2)(zod@3.25.76)
       '@prisma/client':
         specifier: ^6.17.1
         version: 6.17.1(prisma@6.17.1)
       hono:
-        specifier: ^4.9.12
-        version: 4.9.12
+        specifier: ^4.10.2
+        version: 4.10.2
       openmeteo:
         specifier: ^1.2.1
         version: 1.2.1
@@ -373,8 +373,8 @@ packages:
     resolution: {integrity: sha512-L5bGsVkxJbJgdnwyuheIunkGatUF/zssUoxxjACCseZYAVbaqdh9Tsmmlkl8vYan09H7sbvKt4pS8GqKLBrEzA==}
     hasBin: true
 
-  hono@4.9.12:
-    resolution: {integrity: sha512-SrTC0YxqPwnN7yKa8gg/giLyQ2pILCKoideIHbYbFQlWZjYt68D2A4Ae1hehO/aDQ6RmTcpqOV/O2yBtMzx/VQ==}
+  hono@4.10.2:
+    resolution: {integrity: sha512-p6fyzl+mQo6uhESLxbF5WlBOAJMDh36PljwlKtP5V1v09NxlqGru3ShK+4wKhSuhuYf8qxMmrivHOa/M7q0sMg==}
     engines: {node: '>=16.9.0'}
 
   jiti@2.6.1:
@@ -557,13 +557,13 @@ snapshots:
   '@esbuild/win32-x64@0.25.10':
     optional: true
 
-  '@hono/node-server@1.19.5(hono@4.9.12)':
+  '@hono/node-server@1.19.5(hono@4.10.2)':
     dependencies:
-      hono: 4.9.12
+      hono: 4.10.2
 
-  '@hono/zod-validator@0.3.0(hono@4.9.12)(zod@3.25.76)':
+  '@hono/zod-validator@0.3.0(hono@4.10.2)(zod@3.25.76)':
     dependencies:
-      hono: 4.9.12
+      hono: 4.10.2
       zod: 3.25.76
 
   '@openmeteo/sdk@1.21.2':
@@ -705,7 +705,7 @@ snapshots:
       nypm: 0.6.2
       pathe: 2.0.3
 
-  hono@4.9.12: {}
+  hono@4.10.2: {}
 
   jiti@2.6.1: {}
 
