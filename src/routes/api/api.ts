@@ -24,6 +24,9 @@ export const registerApiIndex = (app: Hono) => {
         await getPreferences(ip, geoPosId),
       ]);
 
+      const locale =
+        userPreferences?.locale || (geoPosId.startsWith("loc:") ? "en" : "ja");
+
       return c.json({
         weather: forecast.data.weather,
         publishingOffice: forecast.data.publishingOffice,
@@ -32,6 +35,7 @@ export const registerApiIndex = (app: Hono) => {
         overview: overview.data,
         geoPosId,
         ...userPreferences,
+        locale,
         metadata: {
           forecast: {
             isCached: weather.isCached,
