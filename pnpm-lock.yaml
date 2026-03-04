@@ -9,17 +9,17 @@ importers:
   .:
     dependencies:
       '@hono/node-server':
-        specifier: ^1.19.6
-        version: 1.19.6(hono@4.11.10)
+        specifier: ^1.19.10
+        version: 1.19.10(hono@4.12.4)
       '@hono/zod-validator':
         specifier: ^0.3.0
-        version: 0.3.0(hono@4.11.10)(zod@3.25.76)
+        version: 0.3.0(hono@4.12.4)(zod@3.25.76)
       '@prisma/client':
         specifier: ^6.19.0
         version: 6.19.0(prisma@6.19.0)
       hono:
-        specifier: ^4.11.10
-        version: 4.11.10
+        specifier: ^4.12.4
+        version: 4.12.4
       openmeteo:
         specifier: ^1.2.2
         version: 1.2.2
@@ -251,8 +251,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@hono/node-server@1.19.6':
-    resolution: {integrity: sha512-Shz/KjlIeAhfiuE93NDKVdZ7HdBVLQAfdbaXEaoAVO3ic9ibRSLGIQGkcBbFyuLr+7/1D5ZCINM8B+6IvXeMtw==}
+  '@hono/node-server@1.19.10':
+    resolution: {integrity: sha512-hZ7nOssGqRgyV3FVVQdfi+U4q02uB23bpnYpdvNXkYTRRyWx84b7yf1ans+dnJ/7h41sGL3CeQTfO+ZGxuO+Iw==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: ^4
@@ -373,8 +373,8 @@ packages:
     resolution: {integrity: sha512-L5bGsVkxJbJgdnwyuheIunkGatUF/zssUoxxjACCseZYAVbaqdh9Tsmmlkl8vYan09H7sbvKt4pS8GqKLBrEzA==}
     hasBin: true
 
-  hono@4.11.10:
-    resolution: {integrity: sha512-kyWP5PAiMooEvGrA9jcD3IXF7ATu8+o7B3KCbPXid5se52NPqnOpM/r9qeW2heMnOekF4kqR1fXJqCYeCLKrZg==}
+  hono@4.12.4:
+    resolution: {integrity: sha512-ooiZW1Xy8rQ4oELQ++otI2T9DsKpV0M6c6cO6JGx4RTfav9poFFLlet9UMXHZnoM1yG0HWGlQLswBGX3RZmHtg==}
     engines: {node: '>=16.9.0'}
 
   jiti@2.6.1:
@@ -558,13 +558,13 @@ snapshots:
   '@esbuild/win32-x64@0.25.12':
     optional: true
 
-  '@hono/node-server@1.19.6(hono@4.11.10)':
+  '@hono/node-server@1.19.10(hono@4.12.4)':
     dependencies:
-      hono: 4.11.10
+      hono: 4.12.4
 
-  '@hono/zod-validator@0.3.0(hono@4.11.10)(zod@3.25.76)':
+  '@hono/zod-validator@0.3.0(hono@4.12.4)(zod@3.25.76)':
     dependencies:
-      hono: 4.11.10
+      hono: 4.12.4
       zod: 3.25.76
 
   '@openmeteo/sdk@1.23.0':
@@ -706,7 +706,7 @@ snapshots:
       nypm: 0.6.2
       pathe: 2.0.3
 
-  hono@4.11.10: {}
+  hono@4.12.4: {}
 
   jiti@2.6.1: {}
 
