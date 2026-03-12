@@ -125,3 +125,20 @@ body{
 #update:hover {
   background: #0056b3;
 }
+
+/* Legal links */
+.legal-links {
+  text-align: center;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+}
+
+.legal-links a {
+  color: #666;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.legal-links a:hover {
+  text-decoration: underline;
+}
