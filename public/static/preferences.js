@@ -53,19 +53,35 @@ const updateUI = (locale, t) => {
 
 const main = async() => {
   // Get current settings and translations
-  const [preferences, translationsResponse, configResponse] = await Promise.all([
+  const [preferences, translationsResponse] = await Promise.all([
     fetch('/api/v1/preferences'),
     fetch('/api/v1/translations'),
-    fetch('/api/v1/config')
-  ]);
-  const [preferencesData, translations, config] = await Promise.all([
-    preferences.json(),
-    translationsResponse.json(),
-    configResponse.json()
   ]);
 
+  let configResponse = null;
+  try {
+    configResponse = await fetch('/api/v1/config');
+  } catch (err) {
+    console.error('Failed to fetch /api/v1/config', err);
+  }
+
+  const [preferencesData, translations] = await Promise.all([
+    preferences.json(),
+    translationsResponse.json(),
+  ]);
+
+  let config = {};
+  if (configResponse) {
+    try {
+      config = await configResponse.json();
+    } catch (err) {
+      console.error('Failed to parse /api/v1/config JSON', err);
+      config = {};
+    }
+  }
+
   // Show legal link if configured
-  if (config.legalUrl) {
+  if (config && config.legalUrl) {
     const legalLinksEl = document.getElementById('legalLinks');
     const legalLinkEl = document.getElementById('legalLink');
     legalLinkEl.href = config.legalUrl;
