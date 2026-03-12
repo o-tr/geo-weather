@@ -31,6 +31,9 @@ export const translations = {
       updateError: "エラーが発生しました\n開発者にお問い合わせください",
       selectRegion: "都道府県を選択してください",
     },
+    links: {
+      legal: "利用規約・プライバシーポリシー",
+    },
     languages: {
       ja: "日本語",
       en: "English",
@@ -67,6 +70,9 @@ export const translations = {
       updateSuccess: "Settings updated successfully",
       updateError: "An error occurred\nPlease contact the developer",
       selectRegion: "Please select a region",
+    },
+    links: {
+      legal: "Terms of Service & Privacy Policy",
     },
     languages: {
       ja: "日本語",

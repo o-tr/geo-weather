@@ -43,18 +43,34 @@ const updateUI = (locale, t) => {
 
   // Update button
   document.getElementById('update').textContent = t.buttons.save;
+
+  // Update legal link text
+  const legalLink = document.getElementById('legalLink');
+  if (legalLink) {
+    legalLink.textContent = t.links.legal;
+  }
 };
 
 const main = async() => {
   // Get current settings and translations
-  const [preferences, translationsResponse] = await Promise.all([
+  const [preferences, translationsResponse, configResponse] = await Promise.all([
     fetch('/api/v1/preferences'),
-    fetch('/api/v1/translations')
+    fetch('/api/v1/translations'),
+    fetch('/api/v1/config')
   ]);
-  const [preferencesData, translations] = await Promise.all([
+  const [preferencesData, translations, config] = await Promise.all([
     preferences.json(),
-    translationsResponse.json()
+    translationsResponse.json(),
+    configResponse.json()
   ]);
+
+  // Show legal link if configured
+  if (config.legalUrl) {
+    const legalLinksEl = document.getElementById('legalLinks');
+    const legalLinkEl = document.getElementById('legalLink');
+    legalLinkEl.href = config.legalUrl;
+    legalLinksEl.style.display = '';
+  }
   
   currentTranslations = translations;
   let currentLocale = 'ja';
