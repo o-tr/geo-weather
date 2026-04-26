@@ -1,6 +1,6 @@
 {
   "name": "geo-weather-oss",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "format": "biome format src",
