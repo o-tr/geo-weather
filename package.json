@@ -9,10 +9,10 @@
     "lint:fix": "biome check --unsafe --write src"
   },
   "dependencies": {
-    "@hono/node-server": "^1.19.13",
+    "@hono/node-server": "^1.19.15",
     "@hono/zod-validator": "^0.3.0",
     "@prisma/client": "^6.19.2",
-    "hono": "^4.12.18",
+    "hono": "^4.13.11",
     "openmeteo": "^1.2.3",
     "zod": "^3.25.76"
   },
